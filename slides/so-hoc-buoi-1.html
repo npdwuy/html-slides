@@ -1,0 +1,1171 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thừa số nguyên tố: Nền tảng Số học</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="../templates/ban-ngay/ban-ngay.css">
+<link rel="stylesheet" href="so-hoc.css">
+<style>
+/* Auto-scaled font sizes to 85% */
+.chip { font-size: 2.040cqw; }
+.slide h1 { font-size: 5.100cqw; }
+.slide h2 { font-size: 3.740cqw; }
+.sub { font-size: 2.550cqw; }
+.t { font-size: 2.720cqw; }
+.t-sm { font-size: 2.380cqw; }
+.lbl { font-size: 2.210cqw; }
+.big { font-size: 5.100cqw; }
+.big.sm { font-size: 3.910cqw; }
+.slide sup { font-size: max(.75em, 2.040cqw); }
+.slide sub { font-size: max(.75em, 2.040cqw); }
+.box { font-size: 2.550cqw; }
+.ln { font-size: 2.720cqw; }
+.head { font-size: 3.060cqw; }
+.eq { font-size: 3.060cqw; }
+.eq.final { font-size: 3.400cqw; }
+.code { font-size: 2.210cqw; }
+.code.sm { font-size: 2.040cqw; }
+.tbl { font-size: 2.550cqw; }
+.opt { font-size: 3.230cqw; }
+.opts.one .opt, .opts.compact .opt { font-size: 2.890cqw; }
+.opt .L { font-size: 2.380cqw; }
+.fb { font-size: 2.720cqw; }
+.timer { font-size: 5.950cqw; }
+.timer.xl { font-size: 10.200cqw; }
+.cv-kick { font-size: 2.550cqw; }
+.cv-map { font-size: 2.550cqw; }
+.card { font-size: 2.380cqw; }
+.dk-nav button { font: 600 1.530cqw/1 var(--f-ui); }
+.dk-panel h3 { font-size: 2.040cqw; }
+.dk-ov { font-size: 1.317cqw; }
+.dk-ov .ch b { font-size: 1.360cqw; }
+.dk-help table { font-size: 1.530cqw; }
+.dk-help kbd { font: 600 1.360cqw var(--f-code); }
+.dk-toast { font: 600 1.700cqw var(--f-ui); }
+.dk-audit table { font-size: 1.360cqw; }
+.trace .result { font-size: 2.720cqw; }
+.tr16 .tr { font-size: 2.380cqw; }
+.lk { font-size: 2.040cqw; }
+.lk-cap { font-size: 2.380cqw; }
+.st { font-size: 2.720cqw; }
+.mir-ctl { font-size: 2.550cqw; }
+.mir-key { font-size: 2.210cqw; }
+.lgrid span { font-size: 2.380cqw; }
+.sv { font-size: 2.040cqw; }
+.sc .mx { font-size: 2.720cqw; }
+.cbox { font-size: 3.740cqw; }
+.carr { font-size: 2.550cqw; }
+.bar-row { font-size: 2.550cqw; }
+.clk-cap { font-size: 2.380cqw; }
+.bit .w { font-size: 2.210cqw; }
+.bit .b { font-size: 3.060cqw; }
+.sqc .pw { font-size: 2.720cqw; }
+.sqc .op { font-size: 2.210cqw; }
+.q3 { font-size: 2.720cqw; }
+.q3 .ans { font-size: 2.550cqw; }
+</style>
+</head>
+<body>
+<script type="application/json" id="deck-config">
+{
+  "title": "Thừa số nguyên tố: Nền tảng Số học",
+  "subtitle": "Số học cho lập trình thi đấu · Buổi 1",
+  "totalMinutes": 120,
+  "chapters": [
+    { "id": "0", "name": "Mở đầu", "chip": "<b>Mở đầu</b>" },
+    { "id": "1", "name": "Chương 1 · Kiểm tra ước số: Tại sao duyệt đến √n?", "chip": "<b>Chương 1</b> · ước đi theo cặp" },
+    { "id": "2", "name": "Chương 2 · Tại sao số lượng ước số tuân theo quy tắc nhân?", "chip": "<b>Chương 2</b> · phân tích thừa số nguyên tố" },
+    { "id": "nghi", "name": "Nghỉ" },
+    { "id": "3", "name": "Chương 3 · Thuật toán Sàng Eratosthenes: Tiếp cận loại bỏ", "chip": "<b>Chương 3</b> · cái sàng" },
+    { "id": "4", "name": "Chương 4 · Ước chung lớn nhất (GCD) và Bội chung nhỏ nhất (LCM)", "chip": "<b>Chương 4</b> · gcd và lcm" },
+    { "id": "5", "name": "Chương 5 · 100! có bao nhiêu chữ số 0 ở cuối?", "chip": "<b>Chương 5</b> · số 0 ở cuối của n!" },
+    { "id": "6", "name": "Chương 6 · Xử lý số lớn: Kỹ thuật Đồng dư thức", "chip": "<b>Chương 6</b> · số dư và lũy thừa nhanh" },
+    { "id": "ket", "name": "Kết" }
+  ]
+}
+</script>
+
+<div class="stage">
+
+<!-- ============================== MỞ ĐẦU ============================== -->
+
+<section class="slide cover no-chip" data-ch="0" data-min="1" data-title="Bìa: Thừa số nguyên tố: Nền tảng Số học">
+  <div class="cv-kick">Số học cho lập trình thi đấu · Buổi 1</div>
+  <h1>Thừa số nguyên tố: Nền tảng Số học</h1>
+  <ol class="cv-map" data-s="1">
+    <li><span class="no">1</span><span>Đánh giá độ phức tạp: Tại sao duyệt đến √<i class="v">n</i>?</span></li>
+    <li><span class="no">4</span><span>Ước chung lớn nhất (GCD) và Bội chung nhỏ nhất (LCM)</span></li>
+    <li><span class="no">2</span><span>Tại sao số lượng ước số tuân theo quy tắc nhân?</span></li>
+    <li><span class="no">5</span><span>100! có bao nhiêu chữ số 0 ở cuối?</span></li>
+    <li><span class="no">3</span><span>Thuật toán Sàng Eratosthenes: Tiếp cận loại bỏ</span></li>
+    <li><span class="no">6</span><span>Xử lý số lớn: Kỹ thuật Đồng dư thức</span></li>
+  </ol>
+  <aside class="notes">
+    <p><b>Mục tiêu:</b> cho học sinh thấy cả buổi là một câu chuyện có 6 câu hỏi.</p>
+    <p><b>Lời giảng:</b> “Hôm nay ta trả lời 6 câu hỏi. Câu nào cũng dựa trên một ý: mỗi số được ghép từ các thừa số nguyên tố, và chỉ có đúng một cách ghép.” Bấm → để hiện 6 câu hỏi. Chưa giải thích thêm: ý này sẽ lộ dần qua từng chương.</p>
+    <p><b>Trước giờ học:</b> mở file khi còn mạng để font tải xong. Bấm F để toàn màn hình trên máy chiếu, bấm S để mở cửa sổ giáo viên trên laptop. Slide tùy chọn đang ẩn; bấm O nếu muốn dùng.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="0" data-min="5" data-title="100 cánh tủ: cái nào còn mở?">
+  <h2>100 cánh tủ: cái nào còn mở?</h2>
+  <div class="body row">
+    <div class="col" style="width:41cqw">
+      <p class="t">100 tủ, ban đầu đều đóng. Bạn thứ <i class="v">k</i> (<i class="v">k</i> = 1, 2, …, 100) đảo trạng thái mọi tủ có số là bội của <i class="v">k</i>.</p>
+      <div class="swap">
+        <div class="box ask" data-s="1" data-hide="3">Ghi dự đoán ra bảng con: cuối cùng những tủ nào còn mở?</div>
+        <div class="col" data-s="3">
+          <div class="box key">Tủ mở: <span class="mx">1, 4, 9, 16, 25, 36, 49, 64, 81, 100</span></div>
+          <div class="box warn" data-s="4">Vì sao toàn là số chính phương?</div>
+        </div>
+      </div>
+    </div>
+    <div class="lockers" data-widget="lockers" data-run="2"></div>
+  </div>
+  <aside class="notes">
+    <p><b>Mục tiêu:</b> đặt một câu hỏi treo cho cả buổi.</p>
+    <p><b>Lời giảng:</b> đọc đề rồi làm mẫu bằng lời: bạn 1 mở hết; bạn 2 đóng lại các tủ chẵn; bạn 3 đổi tủ 3, 6, 9, …</p>
+    <ul>
+      <li>Bước 1: hiện khung dự đoán. Cho 1 phút ghi ra bảng con. Câu trả lời hay gặp: “các số nguyên tố”, “các số lẻ”. Chưa sửa.</li>
+      <li>Bước 2: mô phỏng tự chạy khoảng 6 giây (100 bạn đi qua).</li>
+      <li>Bước 3: hiện danh sách tủ mở. Hỏi: “các số này có gì chung?” → số chính phương.</li>
+      <li>Bước 4: “vì sao?”. Không giải ngay: “Ta sẽ trả lời ở chương 1, rồi trả lời lại bằng cách khác ở chương 2.”</li>
+    </ul>
+  </aside>
+</section>
+
+<!-- ============================== CHƯƠNG 1 ============================== -->
+
+<section class="slide" data-ch="1" data-min="2" data-title="Tủ số 12 bị chạm bao nhiêu lần?">
+  <h2>Tủ số 12 bị chạm bao nhiêu lần?</h2>
+  <div class="body col mid">
+    <div class="students">
+      <span class="st d">1</span><span class="st d">2</span><span class="st d">3</span><span class="st d">4</span><span class="st">5</span><span class="st d">6</span><span class="st">7</span><span class="st">8</span><span class="st">9</span><span class="st">10</span><span class="st">11</span><span class="st d">12</span>
+    </div>
+    <p class="t" data-s="1">Bạn thứ <i class="v">k</i> chạm tủ 12 khi 12 là bội của <i class="v">k</i>, tức <i class="v">k</i> là ước của 12.</p>
+    <p class="t" data-s="2">Tủ 12 bị chạm 6 lần, đúng bằng số lượng ước số của 12.</p>
+    <div class="box key" data-s="3">Tủ mở ⟺ bị chạm một số lẻ lần ⟺ <b>số lượng ước số là một số lẻ</b>.</div>
+  </div>
+  <aside class="notes">
+    <p><b>Mục tiêu:</b> dịch bài toán tủ sang ngôn ngữ số học.</p>
+    <p><b>Lời giảng:</b> hỏi “những bạn nào chạm vào tủ 12?” rồi gọi 2–3 em. Bấm → để tô các ước: 1, 2, 3, 4, 6, 12. Bấm → và nhấn mạnh: số lần chạm đúng bằng số lượng ước số. Bấm → cho câu kết.</p>
+    <p><b>Câu chuyển:</b> “Vậy câu hỏi thật là: khi nào một số có số lượng ước số lẻ?”</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="1" data-min="3" data-title="Các ước đi thành cặp">
+  <h2>Các ước đi thành cặp</h2>
+  <div class="body col mid">
+    <div class="pairs" data-widget="pairs" data-n="24" data-h="130" data-arcs="1" data-label="ước của 24"></div>
+    <p class="t" data-s="2"><span class="mx">24</span>: 4 cặp, tức 8 ước. Số chẵn.</p>
+    <div class="pairs" data-s="3" data-widget="pairs" data-n="36" data-h="130" data-arcs="3" data-self="4" data-label="ước của 36" data-callout="6 × 6 = 36"></div>
+    <p class="t" data-s="4"><span class="mx">36</span>: 4 cặp, cộng thêm số 6 tự ghép với chính nó. 9 ước, số lẻ.</p>
+  </div>
+  <aside class="notes">
+    <p><b>Lời giảng:</b> “Nếu <i>d</i> chia hết 24 thì 24/<i>d</i> cũng chia hết 24. Ta nối <i>d</i> với 24/<i>d</i>.”</p>
+    <ul>
+      <li>Bước 1–2: cung nối cho 24 là 1–24, 2–12, 3–8, 4–6. Hỏi: có ước nào không có bạn không? Không có, nên số lượng ước số chẵn.</li>
+      <li>Bước 3–4: làm lại với 36. Số 6 ghép với chính nó vì 6 · 6 = 36.</li>
+    </ul>
+    <p><b>Hỏi lớp:</b> “số nào sẽ có một ước tự ghép với chính nó?” Để học sinh tự nói ra: khi <i>n</i> = <i>d</i> · <i>d</i>, tức <i>n</i> là số chính phương. Sau đó mới sang slide chứng minh.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="1" data-min="4" data-title="Điều kiện để số lượng ước số là số lẻ">
+  <h2>Điều kiện để số lượng ước số là số lẻ</h2>
+  <div class="pairs" data-widget="pairs" data-n="36" data-h="118" data-arcs="1" data-self="3" data-label="ước của 36" data-callout="6 × 6 = 36"></div>
+  <div class="proof">
+    <div class="lbl" data-s="1">Chứng minh</div>
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Ước <i class="v">d</i> luôn đi cùng ước <i class="v">n</i>/<i class="v">d</i>.</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span>Ước khác nhau ghép thành cặp: tổng số lượng ước số là số chẵn.</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span>Ước lẻ loi chỉ có khi <i class="v">d</i> = <i class="v">n</i>/<i class="v">d</i>, tức <i class="v">n</i> = <i class="v">d</i><sup>2</sup>.</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span>Vậy số lượng ước số lẻ ⟺ <i class="v">n</i> là số chính phương.<span class="qed">∎</span></span></div>
+    <div class="ln concl" data-s="5" data-at="5"><span class="no">→</span><span>Tủ mở: <span class="mx">1, 4, 9, …, 100</span>, tức 10 tủ.</span></div>
+  </div>
+  <aside class="notes">
+    <p><b>Mục tiêu:</b> chứng minh chặt điều học sinh vừa thấy. Trước mỗi dòng, hỏi “vì sao dòng này đúng?” rồi mới bấm.</p>
+    <ul>
+      <li>Dòng 1: nếu <i>d</i> | <i>n</i> thì <i>n</i> = <i>d</i> · (<i>n</i>/<i>d</i>), nên <i>n</i>/<i>d</i> cũng là ước.</li>
+      <li>Dòng 2: ghép <i>d</i> với <i>n</i>/<i>d</i>; ghép <i>n</i>/<i>d</i> lại ra <i>d</i>. Vậy các ước khác √<i>n</i> chia thành từng cặp rời nhau, số lượng là chẵn.</li>
+      <li>Dòng 3: ước tự ghép khi <i>d</i> = <i>n</i>/<i>d</i>, tức <i>d</i>² = <i>n</i>. Có nhiều nhất một ước như vậy (<i>d</i> = √<i>n</i>).</li>
+      <li>Dòng 4: số lượng ước số = (số chẵn) + (0 hoặc 1).</li>
+      <li>Dòng →: áp vào tủ. Tủ <i>k</i> mở ⟺ bị chạm lẻ lần ⟺ <i>k</i> chính phương: 10 tủ.</li>
+    </ul>
+    <p><b>Chỗ hay vấp:</b> chỉ nhớ chiều “số chính phương thì có số lượng ước số lẻ”. Nhấn mạnh ⟺ là đúng cả hai chiều.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="1" data-min="3" data-title="Vì sao mỗi cặp luôn có một ước ≤ √n?">
+  <h2>Vì sao mỗi cặp luôn có một ước ≤ √<i class="v">n</i>?</h2>
+  <div class="mirror" data-widget="mirror" data-n="36" data-h="112"></div>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Giả sử cả <i class="v">d</i> và <i class="v">n</i>/<i class="v">d</i> đều lớn hơn √<i class="v">n</i>.</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span>Nhân lại: <i class="v">d</i> · (<i class="v">n</i>/<i class="v">d</i>) &gt; √<i class="v">n</i> · √<i class="v">n</i> = <i class="v">n</i>.</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span>Nhưng <i class="v">d</i> · (<i class="v">n</i>/<i class="v">d</i>) = <i class="v">n</i>. Vô lý.</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span>Vậy một trong hai ước phải ≤ √<i class="v">n</i>.<span class="qed">∎</span></span></div>
+    <div class="ln concl" data-s="5" data-at="5"><span class="no">→</span><span>Tìm ước: chỉ cần thử <i class="v">d</i> từ 1 tới √<i class="v">n</i>.</span></div>
+  </div>
+  <aside class="notes">
+    <p><b>Trước khi chứng minh:</b> kéo thanh trượt <i>n</i> qua vài giá trị (24, 36, 60, 97). Hỏi: có cặp nào nằm hẳn bên phải gương không? Không bao giờ. Các số xanh ở bên trái gương đều nhỏ hơn √<i>n</i>.</p>
+    <p><b>Chứng minh:</b> phản chứng, 4 dòng. Dòng → là hệ quả cho thuật toán.</p>
+    <p><b>Chỗ hay vấp:</b> √24 ≈ 4,9 không phải số nguyên; gương nằm giữa 4 và 6. Với số nguyên tố như 97, chỉ có một cặp 1–97.</p>
+    <p><b>Câu chuyển:</b> “Biến quan sát này thành code.”</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="1" data-min="3" data-title="Từ cặp ước đến thuật toán">
+  <h2>Từ cặp ước đến thuật toán</h2>
+  <div class="trace" style="grid-template-columns:51cqw 1fr">
+    <div class="col">
+      <pre class="code" data-widget="code" data-id="divisors" style="font-size:2.125cqw" data-hl="1:1-5 2:1-5 3:1-5 4:1-5 5:1-2 6:1-4">
+for (int i = 1; i * i &lt;= n; i++)
+  if (n % i == 0) {
+    d.push_back(i);
+    if (i != n / i)
+      d.push_back(n / i);
+  }</pre>
+      <p class="t-sm" data-s="8">Với <i class="v">n</i> = 10<sup>12</sup>: thử tới √<i class="v">n</i> mất khoảng 3 ms; thử hết mất khoảng 48 phút.</p>
+    </div>
+    <div class="col">
+      <div class="lbl"><i class="v">n</i> = 36</div>
+      <div class="tbl tr3">
+        <div class="tr hd"><span><i class="v">i</i></span><span><i class="v">n</i> % <i class="v">i</i></span><span>ước thêm vào</span></div>
+        <div class="tr" data-s="1" data-at="1"><span>1</span><span>0</span><span>1, 36</span></div>
+        <div class="tr" data-s="2" data-at="2"><span>2</span><span>0</span><span>2, 18</span></div>
+        <div class="tr" data-s="3" data-at="3"><span>3</span><span>0</span><span>3, 12</span></div>
+        <div class="tr" data-s="4" data-at="4"><span>4</span><span>0</span><span>4, 9</span></div>
+        <div class="tr" data-s="5" data-at="5"><span>5</span><span>1</span><span>—</span></div>
+        <div class="tr" data-s="6" data-at="6"><span>6</span><span>0</span><span>6 (một lần)</span></div>
+      </div>
+    </div>
+    <div class="result" data-s="7"><span class="mx">36</span> có 9 ước: <b class="cr mx">1, 2, 3, 4, 6, 9, 12, 18, 36</b></div>
+  </div>
+  <aside class="notes">
+    <p><b>Lời giảng:</b> chạy tay với <i>n</i> = 36, mỗi lần bấm → là một giá trị <i>i</i>. Dòng code đang chạy được tô sáng.</p>
+    <ul>
+      <li>Trước dòng <i>i</i> = 6, hỏi: “thêm mấy số?” → chỉ thêm 6 một lần, nhờ kiểm tra <code>i != n / i</code>.</li>
+      <li>Vòng lặp dừng khi <i>i</i> · <i>i</i> &gt; <i>n</i>, tức <i>i</i> = 7 vì 49 &gt; 36.</li>
+      <li>Bước cuối là con số đo thật trên một máy (g++ -O2): 10⁶ phép chia khoảng 3 ms, 10¹² phép chia khoảng 48 phút. Máy khác có thể nhanh hoặc chậm hơn vài lần, nhưng chênh lệch hàng triệu lần thì vẫn vậy.</li>
+    </ul>
+    <p><b>Chỗ hay vấp:</b> với <i>n</i> tới 10¹², <code>n</code> và <code>i</code> phải là <code>long long</code>, nếu không <code>i * i</code> bị tràn.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="1" data-min="2" data-optional data-title="Quên kiểm tra i = n/i thì in ra mấy ước của 36?">
+  <h2>Đoạn code này in ra mấy ước của 36?</h2>
+  <div class="quiz body col" data-widget="quiz" data-key="C">
+    <div class="row top">
+      <pre class="code" data-widget="code" data-id="divisors_bug" style="width:54cqw">
+for (int i = 1; i * i &lt;= n; i++)
+  if (n % i == 0) {
+    d.push_back(i);
+    d.push_back(n / i);
+  }</pre>
+      <div class="opts one grow">
+        <button class="opt" data-k="A"><span class="L">A</span>5</button>
+        <button class="opt" data-k="B"><span class="L">B</span>9</button>
+        <button class="opt" data-k="C"><span class="L">C</span>10</button>
+        <button class="opt" data-k="D"><span class="L">D</span>12</button>
+      </div>
+    </div>
+    <div class="fb"></div>
+    <template data-for="A">5 là số giá trị <i class="v">i</i> chia hết 36 (1, 2, 3, 4, 6). Nhưng mỗi giá trị đó thêm hai số.</template>
+    <template data-for="B">36 đúng là có 9 ước, nhưng đoạn code này thêm số 6 hai lần (<i class="v">i</i> = 6 và <i class="v">n</i>/<i class="v">i</i> = 6).</template>
+    <template data-for="C">Năm giá trị <i class="v">i</i>, mỗi giá trị thêm hai số: 10 số, trong đó số 6 bị lặp.</template>
+    <template data-for="D">12 là khi bỏ luôn kiểm tra <span class="mono">n % i == 0</span>: sáu giá trị <i class="v">i</i>, mỗi giá trị thêm hai số.</template>
+  </div>
+  <aside class="notes">
+    <p><b>Câu hỏi bản lề.</b> Cho 30 giây, học sinh giơ bảng con A/B/C/D. Bấm vào phương án được chọn nhiều nhất để hiện đúng lỗi của phương án đó. Bấm → để hiện đáp án C.</p>
+    <p>Mỗi phương án sai là một lỗi thật: A chỉ đếm <i>i</i>; B không thấy số 6 bị trùng; D bỏ kiểm tra chia hết.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="1" data-min="2" data-optional data-title="Kiểm tra nguyên tố: dừng ở √n">
+  <h2>Kiểm tra nguyên tố: dừng ở √<i class="v">n</i></h2>
+  <div class="row top body">
+    <pre class="code sm" data-widget="code" data-id="isprime" data-hl="1:3 2:4-5 3:4,6" style="width:52cqw">
+using ll = long long;
+bool isPrime(ll n) {
+  if (n &lt; 2) return false;
+  for (ll i = 2; i * i &lt;= n; i++)
+    if (n % i == 0) return false;
+  return true;
+}</pre>
+    <div class="col grow">
+      <div class="box" data-s="1" data-at="1"><span class="mx">n = 1</span>: dừng ngay. Số 1 không phải số nguyên tố.</div>
+      <div class="box" data-s="2" data-at="2"><span class="mx">n = 91</span>: tới <i class="v">i</i> = 7 thì chia hết, vì 91 = 7 · 13.</div>
+      <div class="box" data-s="3" data-at="3"><span class="mx">n = 97</span>: thử <i class="v">i</i> = 2 … 9, không chia hết. Là số nguyên tố.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Nhấn mạnh dòng <code>if (n &lt; 2)</code>: 0 và 1 không phải số nguyên tố. 91 = 7 · 13 là số “trông như nguyên tố” hay bị nhầm. Với 97 chỉ cần thử tới 9 vì 10 · 10 &gt; 97.</p>
+    <p>Dòng <code>using ll = long long;</code> đặt tên ngắn cho kiểu số nguyên lớn; các slide sau dùng lại.</p>
+  </aside>
+</section>
+
+<!-- ============================== CHƯƠNG 2 ============================== -->
+
+<section class="slide" data-ch="2" data-min="3" data-title="Tính phân diễn duy nhất của Thừa số nguyên tố">
+  <h2>Tính phân diễn duy nhất của Thừa số nguyên tố</h2>
+  <div class="row center">
+    <div class="ftree" data-widget="ftree" data-w="40" data-tree="[72,[8,[2],[4,[2],[2]]],[9,[3],[3]]]" data-s1="1" data-s2="2" data-leaf="5"></div>
+    <div class="ftree" data-widget="ftree" data-w="40" data-tree="[72,[6,[2],[3]],[12,[3],[4,[2],[2]]]]" data-s1="3" data-s2="4" data-leaf="5"></div>
+  </div>
+  <p class="t center" data-s="5">Cả hai cây đều ra <span class="mx"><span class="c2">2 · 2 · 2</span> · <span class="c3">3 · 3</span> = <span class="c2">2<sup>3</sup></span> · <span class="c3">3<sup>2</sup></span></span>.</p>
+  <div class="box key" data-s="6"><b>Định lý cơ bản của số học.</b> Mọi số <i class="v">n</i> ≥ 2 đều được phân diễn duy nhất dưới dạng tích các thừa số nguyên tố (không kể thứ tự). Phần “duy nhất” hôm nay ta thừa nhận.</div>
+  <aside class="notes">
+    <p><b>Trước khi bấm:</b> mời hai học sinh lên bảng tách 72 theo hai cách khác nhau.</p>
+    <ul>
+      <li>Bước 1–2: cây thứ nhất (8 · 9). Bước 3–4: cây thứ hai (6 · 12).</li>
+      <li>Hỏi: hai cây có giống nhau không? Còn lá thì sao? → cùng ba số 2 và hai số 3.</li>
+      <li>Bước 5–6: lúc này mới đặt tên định lý.</li>
+    </ul>
+    <p><b>Chỗ thừa nhận (nói rõ với học sinh):</b> phần “đúng một cách” cần một bổ đề: nếu số nguyên tố <i>p</i> chia hết <i>a</i> · <i>b</i> thì <i>p</i> chia hết <i>a</i> hoặc <i>p</i> chia hết <i>b</i>. Hôm nay ta không chứng minh bổ đề này. Phần “tách được” có chứng minh ở slide tùy chọn sau.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="2" data-min="3" data-optional data-title="Vì sao mọi số từ 2 trở lên đều tách được?">
+  <h2>Vì sao mọi số từ 2 trở lên đều tách được?</h2>
+  <p class="head">Ví dụ: 60 = 6 · 10 = (2 · 3) · (2 · 5)</p>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Nếu <i class="v">n</i> là số nguyên tố: xong.</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span>Nếu không, <i class="v">n</i> = <i class="v">a</i> · <i class="v">b</i> với 2 ≤ <i class="v">a</i>, <i class="v">b</i> &lt; <i class="v">n</i>.</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span><i class="v">a</i> và <i class="v">b</i> nhỏ hơn <i class="v">n</i> nên tách được (quy nạp).</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span>Ghép hai cách tách lại: <i class="v">n</i> tách được.<span class="qed">∎</span></span></div>
+    <div class="ln concl" data-s="5" data-at="5"><span class="no">→</span><span>Phần “chỉ một cách” cần thêm một bổ đề; hôm nay ta thừa nhận.</span></div>
+  </div>
+  <aside class="notes">
+    <p>Quy nạp mạnh: giả sử mọi số từ 2 tới <i>n</i> − 1 đều tách được. Học sinh lớp 8 có thể chưa quen quy nạp; khi đó nói bằng lời: “tách mãi thì các số nhỏ dần, nên phải dừng ở các số nguyên tố”.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="2" data-min="2" data-title="Các ước của 72 nằm vừa trong một lưới 4 × 3">
+  <h2>Các ước của 72 nằm vừa trong một lưới 4 × 3</h2>
+  <div class="row body">
+    <div class="col" style="width:40cqw">
+      <p class="big">72 = <span class="c2">2<sup>3</sup></span> · <span class="c3">3<sup>2</sup></span></p>
+      <div class="box ask" data-s="1">72 có bao nhiêu ước? Ghi ra bảng con.</div>
+      <p class="t" data-s="2">Mỗi ước có dạng <span class="mx"><span class="c2">2<sup><i class="v">a</i></sup></span> · <span class="c3">3<sup><i class="v">b</i></sup></span></span>.</p>
+      <p class="t" data-s="3"><i class="v c2">a</i> ∈ {0, 1, 2, 3}: 4 cách.<br><i class="v c3">b</i> ∈ {0, 1, 2}: 3 cách.</p>
+      <div class="box key" data-s="4">4 × 3 = 12 ước.</div>
+    </div>
+    <div class="lattice" data-widget="lattice" data-a="3" data-b="2" data-pts="2" data-w="46"></div>
+  </div>
+  <aside class="notes">
+    <p>Bước 1: cho 30 giây ghi số lượng ước số của 72. Nhiều em liệt kê rồi quên ước 1 hoặc 72.</p>
+    <p>Bước 2: lưới hiện ra; mỗi ước là một điểm (<i>a</i>, <i>b</i>). Có một chi tiết dễ bỏ qua: điểm (0, 0) ứng với 1, điểm (3, 2) ứng với 72.</p>
+    <p>Bước 3–4: đếm điểm, 4 hàng × 3 cột. Hỏi: vì sao là 4 hàng mà không phải 3? → số mũ của 2 có thể là 0, 1, 2, 3.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="2" data-min="2" data-title="Thêm một số nguyên tố, thêm một chiều">
+  <h2>Thêm một số nguyên tố, thêm một chiều</h2>
+  <p class="big sm center">360 = <span class="c2">2<sup>3</sup></span> · <span class="c3">3<sup>2</sup></span> · <span class="c5">5</span></p>
+  <div class="row center top">
+    <div class="layer" data-s="1">
+      <div class="lbl">không có thừa số <span class="c5">5</span></div>
+      <div class="lgrid"><span>8</span><span>24</span><span>72</span><span>4</span><span>12</span><span>36</span><span>2</span><span>6</span><span>18</span><span>1</span><span>3</span><span>9</span></div>
+    </div>
+    <div class="layer with5" data-s="2">
+      <div class="lbl">có một thừa số <span class="c5">5</span></div>
+      <div class="lgrid"><span>40</span><span>120</span><span>360</span><span>20</span><span>60</span><span>180</span><span>10</span><span>30</span><span>90</span><span>5</span><span>15</span><span>45</span></div>
+    </div>
+    <div class="col" data-s="3" style="align-items:center">
+      <div class="isobox" data-widget="isobox" data-w="22"></div>
+      <div class="box key">4 × 3 × 2 = 24 ước</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Thêm thừa số 5: mỗi ước hoặc không chứa 5, hoặc chứa đúng một 5. Hai lưới 4 × 3 chồng lên nhau thành khối 4 × 3 × 2.</p>
+    <p><b>Hỏi lớp:</b> nếu nhân 360 thêm 7 thì có bao nhiêu ước? → 4 × 3 × 2 × 2 = 48 (2520 có 48 ước).</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="2" data-min="4" data-title="Vì sao số lượng ước số là tích các (aᵢ + 1)?">
+  <h2>Vì sao số lượng ước số là tích các (<i class="v">a</i><sub><i class="v">i</i></sub> + 1)?</h2>
+  <p class="head"><i class="v">n</i> = <i class="v">p</i>₁<sup><i class="v">a</i>₁</sup> · <i class="v">p</i>₂<sup><i class="v">a</i>₂</sup> · <i class="v">p</i>₃<sup><i class="v">a</i>₃</sup> · …</p>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Ước <i class="v">d</i> của <i class="v">n</i> chỉ chứa các nguyên tố <i class="v">p</i>₁, <i class="v">p</i>₂, …</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span>Số mũ <i class="v">b</i><sub><i class="v">i</i></sub> của <i class="v">p</i><sub><i class="v">i</i></sub> trong <i class="v">d</i>: 0 ≤ <i class="v">b</i><sub><i class="v">i</i></sub> ≤ <i class="v">a</i><sub><i class="v">i</i></sub>.</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span>Mỗi bộ (<i class="v">b</i>₁, <i class="v">b</i>₂, …) cho đúng một ước.</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span>Có (<i class="v">a</i><sub><i class="v">i</i></sub> + 1) cách chọn mỗi <i class="v">b</i><sub><i class="v">i</i></sub>, độc lập nhau.</span></div>
+    <div class="ln" data-s="5" data-at="5"><span class="no">5</span><span>Vậy số lượng ước số = (<i class="v">a</i>₁ + 1)(<i class="v">a</i>₂ + 1)(<i class="v">a</i>₃ + 1)…<span class="qed">∎</span></span></div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Dòng 1–2: vì <i>d</i> | <i>n</i> nên <i>n</i> = <i>d</i> · <i>e</i>. Số mũ của mỗi <i>p</i> trong <i>d</i> và <i>e</i> cộng lại thành số mũ trong <i>n</i> (nhờ tính duy nhất), nên <i>d</i> không có nguyên tố lạ và 0 ≤ <i>b</i>ᵢ ≤ <i>a</i>ᵢ.</li>
+      <li>Dòng 3: bộ nào cũng cho một ước, vì <i>n</i>/<i>d</i> = ∏ <i>p</i>ᵢ^(<i>a</i>ᵢ − <i>b</i>ᵢ) là số nguyên; hai bộ khác nhau cho hai số khác nhau (tính duy nhất).</li>
+      <li>Dòng 4: quy tắc nhân, chính là lưới 4 × 3 và khối 4 × 3 × 2 vừa thấy.</li>
+    </ul>
+    <p><b>Chỗ hay vấp:</b> quên “+ 1”, tức quên số mũ 0. Nhắc lại điểm (0, 0) ứng với ước 1.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="2" data-min="2" data-title="Giải tủ lần hai: nhìn qua số mũ">
+  <h2>Giải bài toán tủ: Phân tích số mũ của Thừa số nguyên tố</h2>
+  <p class="head">Ví dụ: 36 = 2<sup>2</sup> · 3<sup>2</sup> có (2 + 1)(2 + 1) = 9 ước.</p>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Số lượng ước số = (<i class="v">a</i>₁ + 1)(<i class="v">a</i>₂ + 1)…</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span>Tích lẻ ⟺ mọi thừa số đều lẻ.</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span><i class="v">a</i><sub><i class="v">i</i></sub> + 1 lẻ ⟺ <i class="v">a</i><sub><i class="v">i</i></sub> chẵn.</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span>Mọi số mũ chẵn ⟺ <i class="v">n</i> là số chính phương.<span class="qed">∎</span></span></div>
+  </div>
+  <div class="box key" data-s="5">Hai cách nhìn, một kết luận: ghép cặp ước (slide 5) và số mũ chẵn. Tủ mở: <span class="mx">1, 4, 9, …, 100</span>.</div>
+  <aside class="notes">
+    <p>Mọi số mũ chẵn nghĩa là <i>n</i> = (<i>p</i>₁^(<i>a</i>₁/2) · <i>p</i>₂^(<i>a</i>₂/2) · …)², tức số chính phương; ngược lại số chính phương thì mọi số mũ gấp đôi nên chẵn.</p>
+    <p><b>Hỏi lớp:</b> cách nào thích hơn? Không có đáp án đúng. Cách 1 không cần phân tích; cách 2 dùng phân tích. Mục đích là thấy hai cách nối với nhau.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="2" data-min="3" data-title="Viên gạch cuối cùng dễ bị bỏ sót">
+  <h2>Viên gạch cuối cùng dễ bị bỏ sót</h2>
+  <div class="trace" style="grid-template-columns:51cqw 1fr">
+    <pre class="code sm" data-widget="code" data-id="factor" data-hl="1:1-5 2:1-5 3:1-2 4:1 5:6">
+for (int p = 2; p * p &lt;= n; p++)
+  while (n % p == 0) {
+    f.push_back(p);
+    n /= p;
+  }
+if (n &gt; 1) f.push_back(n);</pre>
+    <div class="col">
+      <div class="lbl"><i class="v">n</i> = 102</div>
+      <div class="tbl tr16">
+        <div class="tr hd"><span><i class="v">p</i></span><span><i class="v">n</i></span><span>việc làm</span></div>
+        <div class="tr" data-s="1" data-at="1"><span>2</span><span>102 → 51</span><span>thêm 2</span></div>
+        <div class="tr" data-s="2" data-at="2"><span>3</span><span>51 → 17</span><span>thêm 3</span></div>
+        <div class="tr" data-s="3" data-at="3"><span>4</span><span>17</span><span>không chia hết</span></div>
+        <div class="tr" data-s="4" data-at="4"><span>5</span><span>17</span><span>25 &gt; 17: dừng</span></div>
+        <div class="tr" data-s="5" data-at="5"><span>—</span><span>17 &gt; 1</span><span>thêm 17</span></div>
+      </div>
+    </div>
+    <div class="result" data-s="6"><span class="mx">102 = <span class="c2">2</span> · <span class="c3">3</span> · 17</span>. Vì sao 17 là số nguyên tố? Nó không chia hết cho 2, 3, 4, tức mọi số từ 2 tới √17.</div>
+  </div>
+  <aside class="notes">
+    <p>Chạy tay <i>n</i> = 102, mỗi lần bấm là một giá trị <i>p</i>. Vòng lặp so <i>p</i> · <i>p</i> với <i>n</i> hiện tại (đã chia nhỏ), nên dừng sớm ở <i>p</i> = 5 vì 25 &gt; 17.</p>
+    <p><b>Hỏi:</b> “còn 17 thì sao?” → nếu thiếu dòng cuối, ta mất thừa số nguyên tố 17.</p>
+    <p><b>Lý do 17 là số nguyên tố:</b> 17 không chia hết cho 2 và 3 (đã chia hết các thừa số 2, 3 từ trước), và không chia hết cho 4 (vừa thử). Không có ước nào từ 2 tới √17 ≈ 4,1, nên theo slide 6 nó là số nguyên tố.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="2" data-min="2" data-title="Số nhỏ nhất có đúng 6 ước là số nào?">
+  <h2>Số nhỏ nhất có đúng 6 ước là số nào?</h2>
+  <div class="quiz body col mid" data-widget="quiz" data-key="C">
+    <div class="opts">
+      <button class="opt" data-k="A"><span class="L">A</span>32</button>
+      <button class="opt" data-k="B"><span class="L">B</span>30</button>
+      <button class="opt" data-k="C"><span class="L">C</span>12</button>
+      <button class="opt" data-k="D"><span class="L">D</span>36</button>
+    </div>
+    <div class="fb"></div>
+    <template data-for="A">32 = 2<sup>5</sup> có 5 + 1 = 6 ước. Đúng 6 ước, nhưng chưa phải số nhỏ nhất.</template>
+    <template data-for="B">30 = 2 · 3 · 5 có 2 · 2 · 2 = 8 ước, không phải 6.</template>
+    <template data-for="C">12 = 2<sup>2</sup> · 3 có (2 + 1)(1 + 1) = 6 ước, và mọi số nhỏ hơn 12 đều có ít hơn 6 ước.</template>
+    <template data-for="D">36 = 2<sup>2</sup> · 3<sup>2</sup> có 3 · 3 = 9 ước, không phải 6.</template>
+  </div>
+  <aside class="notes">
+    <p><b>Câu hỏi bản lề.</b> Cho 1 phút. Nhiều em chọn 30 (vì “có ba số nguyên tố”) hoặc 32. Bấm vào phương án được chọn nhiều nhất để hiện lỗi của nó, rồi bấm → để hiện đáp án.</p>
+    <p><b>Mở rộng:</b> số nhỏ nhất có đúng 8 ước? → 24 = 2³ · 3.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="2" data-min="3" data-optional data-title="Khi nào tích i · j là số chính phương?">
+  <h2>Khi nào tích <i class="v">i</i> · <i class="v">j</i> là số chính phương?</h2>
+  <p class="head"><i class="v">s</i>(<i class="v">n</i>) = tích các nguyên tố có số mũ lẻ trong <i class="v">n</i>. Ví dụ <i class="v">s</i>(12) = 3.</p>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Số mũ của <i class="v">p</i> trong <i class="v">i</i> · <i class="v">j</i> là <i class="v">x</i> + <i class="v">y</i>.</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span><i class="v">x</i> + <i class="v">y</i> chẵn ⟺ <i class="v">x</i> và <i class="v">y</i> cùng chẵn lẻ.</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span>Mọi <i class="v">p</i> đều vậy ⟺ <i class="v">i</i>, <i class="v">j</i> có cùng nguyên tố mũ lẻ.</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span>Vậy <i class="v">i</i> · <i class="v">j</i> chính phương ⟺ <i class="v">s</i>(<i class="v">i</i>) = <i class="v">s</i>(<i class="v">j</i>).<span class="qed">∎</span></span></div>
+    <div class="ln concl" data-s="5" data-at="5"><span class="no">→</span><span><i class="v">s</i>(12) = <i class="v">s</i>(27) = 3, và 12 · 27 = 324 = 18<sup>2</sup>.</span></div>
+  </div>
+  <aside class="notes">
+    <p>Dành cho lớp khá. Bài về nhà ABC254 D dùng đúng ý này: đếm các cặp (<i>i</i>, <i>j</i>) có <i>s</i>(<i>i</i>) = <i>s</i>(<i>j</i>).</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="2" data-min="6" data-title="Luyện tập A (tính tay): số lẻ ≤ 200 có đúng 8 ước">
+  <h2>Luyện tập: số lẻ ≤ 200 có đúng 8 ước</h2>
+  <div class="row top body">
+    <div class="col grow">
+      <p class="t">Có bao nhiêu số lẻ từ 1 đến 200 có đúng 8 ước? Làm trên giấy.</p>
+      <div class="box" data-s="1">Gợi ý 1. 8 = 8 = 4 · 2 = 2 · 2 · 2, nên số đó có dạng <span class="mx"><i class="v">p</i><sup>7</sup></span>, <span class="mx"><i class="v">p</i><sup>3</sup> · <i class="v">q</i></span> hoặc <span class="mx"><i class="v">p</i> · <i class="v">q</i> · <i class="v">r</i></span>.</div>
+      <div class="box" data-s="2">Gợi ý 2. Số lẻ thì không có thừa số 2, mà 3<sup>7</sup> = 2187 đã lớn hơn 200.</div>
+      <div class="box key" data-s="3">Đáp án: 5 số. 105 = 3 · 5 · 7, 135 = 3<sup>3</sup> · 5, 165 = 3 · 5 · 11, 189 = 3<sup>3</sup> · 7, 195 = 3 · 5 · 13.</div>
+    </div>
+    <div class="col" style="width:25cqw;align-items:center">
+      <div class="timer" data-widget="timer" data-sec="360"></div>
+      <div class="lbl">dạng ABC106 B</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Bấm vào đồng hồ để chạy 6 phút (bấm lại để dừng, bấm đúp để đặt lại, hoặc phím T). Học sinh làm trên giấy.</p>
+    <ul>
+      <li>Sau khoảng 2 phút, bấm → hiện gợi ý 1. Sau khoảng 4 phút, gợi ý 2. Cuối cùng là đáp án.</li>
+      <li>Kiểm tra dạng <i>p</i>³ · <i>q</i>: 27 · 5 = 135, 27 · 7 = 189, còn 27 · 11 = 297 và 125 · 3 = 375 đều quá 200.</li>
+      <li>Dạng <i>p</i> · <i>q</i> · <i>r</i>: 3 · 5 · 7, 3 · 5 · 11, 3 · 5 · 13; còn 3 · 7 · 11 = 231 quá 200.</li>
+    </ul>
+    <p>Code bài này (ABC106 B, N ≤ 200) làm ở nhà.</p>
+  </aside>
+</section>
+
+<!-- ============================== NGHỈ ============================== -->
+
+<section class="slide brk no-chip" data-ch="nghi" data-min="5" data-title="Nghỉ 5 phút">
+  <h2>Nghỉ 5 phút</h2>
+  <div class="timer xl" data-widget="timer" data-sec="300"></div>
+  <p class="t center">Nghĩ thử trong lúc nghỉ: vì sao số 1 không được coi là số nguyên tố?</p>
+  <aside class="notes">
+    <p>Bấm vào đồng hồ (hoặc phím T) để chạy 5 phút.</p>
+    <p><b>Đáp án câu hỏi nghỉ:</b> nếu 1 là số nguyên tố thì phân tích không còn duy nhất: 6 = 2 · 3 = 1 · 2 · 3 = 1 · 1 · 2 · 3 = … Định lý cơ bản sẽ sai. Người ta loại số 1 ra để định lý đúng và gọn.</p>
+  </aside>
+</section>
+
+<!-- ============================== CHƯƠNG 3 ============================== -->
+
+<section class="slide" data-ch="3" data-min="2" data-title="Thử từng số thì mất bao lâu?">
+  <h2>Thử từng số thì mất bao lâu?</h2>
+  <div class="body col mid">
+    <p class="t">Muốn tìm mọi số nguyên tố ≤ 10<sup>7</sup>.</p>
+    <p class="t" data-s="1">Cách đã biết: với mỗi số, thử chia tới √ của nó.</p>
+    <div class="bar-row" data-s="2"><span class="what">thử chia</span><span class="hbar k4" style="width:44cqw"></span><span class="mx">≈ 1,7 tỉ phép chia</span></div>
+    <div class="box ask" data-s="3">Có cách nào khỏi phải hỏi từng số không?</div>
+  </div>
+  <aside class="notes">
+    <p>Con số 1,7 tỉ được đếm thật bằng máy: số hợp dừng sớm khi gặp ước nhỏ nhất, còn số nguyên tố phải thử hết tới √. Theo phép đo ở slide 7, máy thường làm khoảng 3–4 trăm triệu phép chia mỗi giây, nên mất khoảng 5 giây: quá chậm cho một bài thi.</p>
+    <p><b>Câu chuyển:</b> “Thay vì mỗi số đi hỏi ‘ai chia hết tôi’, ta để mỗi số nguyên tố tự đi đánh dấu.”</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="3" data-min="3" data-title="Sàng Eratosthenes: Loại bỏ dần các bội số">
+  <h2>Sàng Eratosthenes: Loại bỏ dần các bội số</h2>
+  <div class="row body">
+    <div class="sieve" data-widget="sieve" data-map="2:2 3:3 4:5 5:7"></div>
+    <div class="col grow">
+      <div class="swap">
+        <div class="box ask" data-s="1" data-hide="2">Gạch hết bội của 2 và 3 thì còn bao nhiêu số chưa bị gạch, từ 2 đến 100?</div>
+        <div class="box key sv-count" data-s="2"></div>
+      </div>
+      <p class="t" data-s="2"><span class="sw p2"></span>bội của 2, gạch từ 4</p>
+      <p class="t" data-s="3"><span class="sw p3"></span>bội của 3, gạch từ 9</p>
+      <p class="t" data-s="4"><span class="sw p5"></span>bội của 5, gạch từ 25</p>
+      <p class="t" data-s="5"><span class="sw p7"></span>bội của 7, gạch từ 49</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Bước 1: câu dự đoán (đáp án 34). Bước 2–5: gạch lần lượt bội của 2, 3, 5, 7. Mỗi ô mang màu của số nguyên tố gạch nó <b>đầu tiên</b>.</p>
+    <ul>
+      <li>Sau bước 3, hỏi: “vì sao không cần gạch bội của 4?” → bội của 4 đã là bội của 2.</li>
+      <li>Sau bước 5, hỏi: “sao không gạch tiếp bội của 11?” → để dành cho slide 24.</li>
+      <li>Ô in đậm cuối cùng là 25 số nguyên tố ≤ 100.</li>
+    </ul>
+  </aside>
+</section>
+
+<section class="slide" data-ch="3" data-min="2" data-title="Vì sao bắt đầu gạch từ p², không phải 2p?">
+  <h2>Vì sao bắt đầu gạch từ <i class="v">p</i><sup>2</sup>, không phải 2<i class="v">p</i>?</h2>
+  <div class="strip">
+    <div class="sc p2"><span class="mx">5 · 2 = 10</span><span class="t-sm">2 đã gạch</span></div>
+    <div class="sc p3"><span class="mx">5 · 3 = 15</span><span class="t-sm">3 đã gạch</span></div>
+    <div class="sc p2"><span class="mx">5 · 4 = 20</span><span class="t-sm">2 đã gạch</span></div>
+    <div class="sc p5"><span class="mx">5 · 5 = 25</span><span class="t-sm">bắt đầu từ đây</span></div>
+  </div>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Xét bội <i class="v">k</i> · <i class="v">p</i> với 2 ≤ <i class="v">k</i> &lt; <i class="v">p</i>.</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span><i class="v">k</i> có ước nguyên tố <i class="v">q</i> ≤ <i class="v">k</i> &lt; <i class="v">p</i>.</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span><i class="v">q</i> chia hết <i class="v">k</i> · <i class="v">p</i>, nên <i class="v">q</i> đã gạch nó rồi.</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span>Chỉ còn <i class="v">k</i> ≥ <i class="v">p</i>: bắt đầu từ <i class="v">p</i> · <i class="v">p</i>.<span class="qed">∎</span></span></div>
+  </div>
+  <aside class="notes">
+    <p>Hỏi: khi gạch bội của 5, các số 10, 15, 20 đã bị gạch chưa, và bởi ai? → 2, 3, 2. Sau đó chứng minh tổng quát.</p>
+    <p>Dòng 2 dùng một điều hiển nhiên đã gặp: mọi số <i>k</i> ≥ 2 có ít nhất một ước nguyên tố (chính là thừa số nguyên tố nhỏ nhất của nó).</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="3" data-min="2" data-title="Vì sao chỉ cần gạch với p ≤ √N?">
+  <h2>Vì sao chỉ cần gạch với <i class="v">p</i> ≤ √<i class="v">N</i>?</h2>
+  <p class="head">Ví dụ: 91 = 7 · 13, và 7 ≤ √100 = 10, nên 91 đã bị 7 gạch.</p>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Cho hợp số <i class="v">n</i> ≤ <i class="v">N</i>. Viết <i class="v">n</i> = <i class="v">a</i> · <i class="v">b</i>, 2 ≤ <i class="v">a</i> ≤ <i class="v">b</i>.</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span><i class="v">a</i><sup>2</sup> ≤ <i class="v">a</i> · <i class="v">b</i> = <i class="v">n</i> ≤ <i class="v">N</i>, nên <i class="v">a</i> ≤ √<i class="v">N</i>.</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span>Ước nguyên tố <i class="v">p</i> của <i class="v">a</i>: <i class="v">p</i> ≤ <i class="v">a</i> ≤ √<i class="v">N</i>.</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span><i class="v">p</i> chia hết <i class="v">n</i>, nên <i class="v">n</i> đã bị <i class="v">p</i> gạch.<span class="qed">∎</span></span></div>
+  </div>
+  <aside class="notes">
+    <p>Đây chính là slide 6 dùng lại: mỗi cặp ước có một số ≤ √<i>n</i>. Mọi hợp số ≤ <i>N</i> đều đã bị một số nguyên tố ≤ √<i>N</i> gạch, nên sàng tới 100 chỉ cần 2, 3, 5, 7.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="3" data-min="3" data-title="Cài đặt thuật toán Sàng Eratosthenes">
+  <h2>Cài đặt thuật toán Sàng Eratosthenes</h2>
+  <div class="row top">
+    <pre class="code sm" data-widget="code" data-id="sieve" data-hl="1:1-2 2:3-4 3:5-6" style="width:60cqw">
+for (int i = 2; i &lt;= N; i++)
+  spf[i] = i;
+for (int p = 2; p * p &lt;= N; p++)
+  if (spf[p] == p)
+    for (int j = p * p; j &lt;= N; j += p)
+      if (spf[j] == j) spf[j] = p;</pre>
+    <div class="col grow">
+      <p class="t-sm" data-s="1" data-at="1">Ban đầu: <span class="mono">spf[i] = i</span>.</p>
+      <p class="t-sm" data-s="2" data-at="2"><span class="mono">spf[p] == p</span>: chưa ai gạch <i class="v">p</i>, nên <i class="v">p</i> là số nguyên tố.</p>
+      <p class="t-sm" data-s="3" data-at="3">Gạch từ <i class="v">p</i><sup>2</sup>; chỉ ghi spf ở lần gạch đầu tiên.</p>
+    </div>
+  </div>
+  <div class="col" data-s="4">
+    <div class="bar-row"><span class="what">thử chia</span><span class="hbar k4" style="width:52cqw"></span><span class="mx">≈ 1,7 tỉ</span></div>
+    <div class="bar-row"><span class="what">sàng</span><span class="hbar k2" style="width:.7cqw"></span><span class="mx">≈ 23 triệu lần gạch</span></div>
+  </div>
+  <aside class="notes">
+    <p><b>spf</b> là “smallest prime factor”: ước nguyên tố nhỏ nhất. Khai báo <code>int spf[N + 1];</code>.</p>
+    <ul>
+      <li>Bước 1–3: dòng code ứng với từng ý đã chứng minh (bắt đầu từ <i>p</i>², dừng ở √<i>N</i>).</li>
+      <li>Bước 4: với <i>N</i> = 10⁷, sàng gạch khoảng 23 triệu lần, so với khoảng 1,7 tỉ phép chia của cách thử từng số (cả hai đã đếm bằng script).</li>
+    </ul>
+    <p><b>Bộ nhớ:</b> mảng 10⁷ số <code>int</code> tốn khoảng 40 MB. Nhớ kiểm tra giới hạn bộ nhớ của đề trước khi nộp.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="3" data-min="2" data-title="Tiền xử lý SPF để phân tích trong O(log N)">
+  <h2>Tiền xử lý SPF để phân tích trong $\mathcal{O}(\log N)$</h2>
+  <div class="chain">
+    <span class="cbox">84</span>
+    <span class="carr" data-s="1">÷ <b class="c2">2</b> →</span><span class="cbox" data-s="1">42</span>
+    <span class="carr" data-s="2">÷ <b class="c2">2</b> →</span><span class="cbox" data-s="2">21</span>
+    <span class="carr" data-s="3">÷ <b class="c3">3</b> →</span><span class="cbox" data-s="3">7</span>
+    <span class="carr" data-s="4">÷ <b class="c7">7</b> →</span><span class="cbox" data-s="4">1</span>
+  </div>
+  <p class="t center" data-s="5">Mỗi bước chia cho spf của số hiện tại: <span class="mx">84 = <span class="c2">2<sup>2</sup></span> · <span class="c3">3</span> · <span class="c7">7</span></span>.</p>
+  <div class="row top" data-s="6">
+    <pre class="code" data-widget="code" data-id="spf_factor" style="width:44cqw">
+while (n &gt; 1) {
+  f.push_back(spf[n]);
+  n /= spf[n];
+}</pre>
+    <p class="t-sm grow">Mỗi bước chia cho một số ≥ 2, nên <i class="v">n</i> giảm ít nhất một nửa: không quá 23 bước với <i class="v">n</i> ≤ 10<sup>7</sup>.</p>
+  </div>
+  <aside class="notes">
+    <p>Sau khi có mảng spf, phân tích một số chỉ cần chia liên tiếp cho spf: spf(84) = 2, spf(42) = 2, spf(21) = 3, spf(7) = 7.</p>
+    <p>Bài CSES 1713 (10⁵ truy vấn, <i>x</i> ≤ 10⁶) cần đúng kỹ thuật này: sàng một lần, rồi mỗi truy vấn phân tích trong vài bước.</p>
+    <p>23 bước vì 2²³ = 8 388 608 ≤ 10⁷ &lt; 2²⁴.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="3" data-min="2" data-optional data-title="Sàng đến 100, số nguyên tố lớn nhất phải đi gạch là số nào?">
+  <h2>Sàng đến 100: số nguyên tố lớn nhất phải đi gạch là số nào?</h2>
+  <div class="quiz body col mid" data-widget="quiz" data-key="D">
+    <div class="opts">
+      <button class="opt" data-k="A"><span class="L">A</span>50</button>
+      <button class="opt" data-k="B"><span class="L">B</span>97</button>
+      <button class="opt" data-k="C"><span class="L">C</span>10</button>
+      <button class="opt" data-k="D"><span class="L">D</span>7</button>
+    </div>
+    <div class="fb"></div>
+    <template data-for="A">50 = 100/2: nhầm với “gạch tới <i class="v">N</i>/2”. Chỉ cần <i class="v">p</i> ≤ √100.</template>
+    <template data-for="B">97 là số nguyên tố lớn nhất ≤ 100, nhưng nó không phải gạch gì: 97 · 97 &gt; 100.</template>
+    <template data-for="C">√100 = 10, nhưng 10 không phải số nguyên tố.</template>
+    <template data-for="D">7 là số nguyên tố lớn nhất ≤ √100 = 10. Số nguyên tố kế tiếp là 11, và 11<sup>2</sup> = 121 &gt; 100.</template>
+  </div>
+  <aside class="notes"><p>Câu hỏi bản lề. Đáp án D.</p></aside>
+</section>
+
+<section class="slide" data-ch="3" data-min="3" data-optional data-title="Có bao nhiêu số nguyên tố?">
+  <h2>Có bao nhiêu số nguyên tố?</h2>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Giả sử chỉ có hữu hạn: <i class="v">p</i>₁, <i class="v">p</i>₂, …, <i class="v">p</i><sub><i class="v">k</i></sub>.</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span>Đặt <i class="v">N</i> = <i class="v">p</i>₁ · <i class="v">p</i>₂ · … · <i class="v">p</i><sub><i class="v">k</i></sub> + 1.</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span><i class="v">N</i> có ước nguyên tố <i class="v">p</i>. <i class="v">p</i> là một trong các <i class="v">p</i><sub><i class="v">i</i></sub>.</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span>Nên <i class="v">p</i> chia hết <i class="v">p</i>₁ · … · <i class="v">p</i><sub><i class="v">k</i></sub>, và chia hết <i class="v">N</i>.</span></div>
+    <div class="ln" data-s="5" data-at="5"><span class="no">5</span><span>Vậy <i class="v">p</i> | <i class="v">N</i> − <i class="v">p</i>₁ · … · <i class="v">p</i><sub><i class="v">k</i></sub> = 1. Vô lý.<span class="qed">∎</span></span></div>
+    <div class="ln concl" data-s="6" data-at="6"><span class="no">→</span><span><i class="v">N</i> chưa chắc là số nguyên tố: 2 · 3 · 5 · 7 · 11 · 13 + 1 = 30031 = 59 · 509.</span></div>
+  </div>
+  <aside class="notes">
+    <p>Chứng minh của Euclid, hơn 2000 năm tuổi. Lưu ý dòng cuối: nhiều học sinh tưởng <i>N</i> luôn là số nguyên tố. Chứng minh chỉ cần <i>N</i> có một ước nguyên tố nằm ngoài danh sách.</p>
+  </aside>
+</section>
+
+<!-- ============================== CHƯƠNG 4 ============================== -->
+
+<section class="slide" data-ch="4" data-min="3" data-title="GCD và LCM dưới góc nhìn số mũ của Thừa số nguyên tố">
+  <h2>GCD và LCM dưới góc nhìn số mũ nguyên tố</h2>
+  <div class="row body">
+    <div class="expbars" data-widget="expbars" data-p="2,3,5" data-a="3,2,0" data-b="2,1,1" data-na="72" data-nb="60" data-w="46"></div>
+    <div class="eqs">
+      <div class="eq" data-s="1">72 = <span class="c2">2<sup>3</sup></span> · <span class="c3">3<sup>2</sup></span></div>
+      <div class="eq" data-s="2">60 = <span class="c2">2<sup>2</sup></span> · <span class="c3">3</span> · <span class="c5">5</span></div>
+      <div class="eq c2" data-s="3">gcd = 2<sup>2</sup> · 3 = <b>12</b></div>
+      <div class="eq cr" data-s="4">lcm = 2<sup>3</sup> · 3<sup>2</sup> · 5 = <b>360</b></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Bước 1–2: số mũ của 72 (cột đậm) và 60 (cột nhạt) cho từng số nguyên tố 2, 3, 5.</p>
+    <p><b>Hỏi:</b> ước chung lớn nhất được phép có mấy thừa số 2? → nhiều nhất 2, vì 60 chỉ có hai. Vậy gcd lấy số mũ nhỏ (vạch xanh). Bội chung nhỏ nhất phải chứa đủ thừa số của cả hai, nên lấy số mũ lớn (vạch đỏ).</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="4" data-min="2" data-title="Vì sao gcd · lcm = a · b?">
+  <h2>Vì sao gcd · lcm = <i class="v">a</i> · <i class="v">b</i>?</h2>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Với mỗi nguyên tố <i class="v">p</i>, số mũ trong <i class="v">a</i>, <i class="v">b</i> là <i class="v">x</i>, <i class="v">y</i>.</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span>gcd lấy số mũ nhỏ hơn: min(<i class="v">x</i>, <i class="v">y</i>).</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span>lcm lấy số mũ lớn hơn: max(<i class="v">x</i>, <i class="v">y</i>).</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span>min(<i class="v">x</i>, <i class="v">y</i>) + max(<i class="v">x</i>, <i class="v">y</i>) = <i class="v">x</i> + <i class="v">y</i>.<span class="qed">∎</span></span></div>
+    <div class="ln concl" data-s="5" data-at="5"><span class="no">→</span><span>Kiểm tra: 72 · 60 = 4320 = 12 · 360.</span></div>
+  </div>
+  <aside class="notes">
+    <p>Dòng 2–3 dựa vào hệ quả của tính duy nhất: <i>d</i> | <i>a</i> ⟺ mọi số mũ của <i>d</i> không vượt số mũ tương ứng của <i>a</i>. Vì vậy ước chung lớn nhất lấy số mũ nhỏ nhất, bội chung nhỏ nhất lấy số mũ lớn nhất.</p>
+    <p>Kết luận: gcd · lcm và <i>a</i> · <i>b</i> có cùng số mũ ở mọi nguyên tố, nên bằng nhau. Dùng nó để giải thích lcm = <i>a</i> / gcd · <i>b</i> ở slide 33.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="4" data-min="3" data-title="Thuật toán Euclid: Khi phân tích nguyên tố bất khả thi">
+  <h2>Thuật toán Euclid: Khi phân tích nguyên tố bất khả thi</h2>
+  <p class="sub">Cắt hình vuông lớn nhất có thể, rồi lặp lại với phần còn thừa.</p>
+  <div class="euclid" data-widget="euclid" data-a="21" data-b="15" data-w="50"></div>
+  <aside class="notes">
+    <p>Với số lớn (10¹⁸) không phân tích nhanh được, cần cách khác. Hỏi trước: “hình vuông cuối cùng có cạnh bao nhiêu?” Cho đoán.</p>
+    <ul>
+      <li>Mỗi lần bấm, một hình vuông được vẽ ra. Phương trình hiện khi xong mỗi loại hình vuông: 21 = 1 · 15 + 6, 15 = 2 · 6 + 3, 6 = 2 · 3 + 0.</li>
+      <li>Bước cuối: ô 3 × 3 lát kín mọi hình vuông đã cắt, nên lát kín cả hình chữ nhật: 3 chia hết cả 21 và 15.</li>
+    </ul>
+    <p><b>Câu chuyển:</b> “3 là một ước chung. Vì sao nó là ước chung <i>lớn nhất</i>?” → slide sau.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="4" data-min="3" data-title="Vì sao gcd(a, b) = gcd(b, a mod b)?">
+  <h2>Vì sao gcd(<i class="v">a</i>, <i class="v">b</i>) = gcd(<i class="v">b</i>, <i class="v">a</i> mod <i class="v">b</i>)?</h2>
+  <p class="head"><i class="v">a</i> = <i class="v">q</i> · <i class="v">b</i> + <i class="v">r</i>, với 0 ≤ <i class="v">r</i> &lt; <i class="v">b</i></p>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Nếu <i class="v">d</i> | <i class="v">a</i> và <i class="v">d</i> | <i class="v">b</i> thì <i class="v">d</i> | <i class="v">a</i> − <i class="v">q</i> · <i class="v">b</i> = <i class="v">r</i>.</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span>Nếu <i class="v">d</i> | <i class="v">b</i> và <i class="v">d</i> | <i class="v">r</i> thì <i class="v">d</i> | <i class="v">q</i> · <i class="v">b</i> + <i class="v">r</i> = <i class="v">a</i>.</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span>Hai cặp có cùng các ước chung.</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span>Nên có cùng ước chung lớn nhất.<span class="qed">∎</span></span></div>
+    <div class="ln concl" data-s="5" data-at="5"><span class="no">→</span><span>Vì sao dừng? <i class="v">r</i> &lt; <i class="v">b</i>, số thứ hai giảm dần; tới 0 thì gcd(<i class="v">x</i>, 0) = <i class="v">x</i>.</span></div>
+    <div class="ln concl" data-s="6" data-at="6"><span class="no">→</span><span class="mx">gcd(21, 15) = gcd(15, 6) = gcd(6, 3) = gcd(3, 0) = 3</span></div>
+  </div>
+  <aside class="notes">
+    <p>Dòng 1–2 dùng tính chất: nếu <i>d</i> chia hết <i>x</i> và <i>y</i> thì <i>d</i> chia hết <i>x</i> ± <i>k</i> · <i>y</i>. Hai cặp có cùng tập ước chung nên có cùng số lớn nhất.</p>
+    <p>Dòng cuối khớp với hình ở slide 31: mỗi loại hình vuông là một bước của Euclid.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="4" data-min="3" data-title="gcd và lcm bằng code, kèm một cái bẫy">
+  <h2>gcd và lcm bằng code, kèm một cái bẫy</h2>
+  <div class="swap body">
+    <div class="quiz col" data-widget="quiz" data-key="B" data-hide="2">
+      <pre class="code" data-widget="code" data-id="lcm_bug" style="width:56cqw">
+int a = 100000, b = 99999;
+int g = gcd(a, b);   // g = 1
+int l = a * b / g;   // l = ?</pre>
+      <div class="opts compact">
+        <button class="opt" data-k="A"><span class="L">A</span>9 999 900 000</button>
+        <button class="opt" data-k="B"><span class="L">B</span>1 409 965 408</button>
+        <button class="opt" data-k="C"><span class="L">C</span>1</button>
+        <button class="opt" data-k="D"><span class="L">D</span>100 000</button>
+      </div>
+      <div class="fb"></div>
+      <template data-for="A">Đó là đáp số đúng về toán, nhưng 9 999 900 000 vượt quá giới hạn của int (2 147 483 647).</template>
+      <template data-for="B">Tràn số: phép nhân trong int vượt giới hạn và cho kết quả sai. Theo chuẩn C++ đây là hành vi không xác định; thực tế thường in ra 1 409 965 408.</template>
+      <template data-for="C">1 là gcd(100000, 99999), không phải lcm.</template>
+      <template data-for="D">100 000 là số lớn hơn trong hai số; lcm phải chia hết cho cả hai.</template>
+    </div>
+    <div class="col" data-s="2">
+      <pre class="code" data-widget="code" data-id="gcd_lcm" style="width:62cqw">
+using ll = long long;
+ll gcd(ll a, ll b) {
+  return b == 0 ? a : gcd(b, a % b);
+}
+ll lcm(ll a, ll b) {
+  return a / gcd(a, b) * b;
+}</pre>
+      <p class="t">Chia trước rồi mới nhân, và dùng long long: 10<sup>9</sup> · 10<sup>9</sup> = 10<sup>18</sup> vẫn vừa.</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Cho học sinh chọn trước. Đáp án B: <code>int</code> chứa tối đa 2 147 483 647, mà 100000 · 99999 = 9 999 900 000. Theo chuẩn C++ tràn số có dấu là hành vi không xác định; trên máy thường gặp nó cho ra 1 409 965 408 (đã kiểm khi biên dịch với -fwrapv).</p>
+    <p>Bấm → để thay bằng code đúng. gcd viết đệ quy một dòng. Trong C++14 chưa có <code>std::gcd</code> (C++17 mới có); có thể dùng <code>__gcd</code> của GCC.</p>
+    <p><code>long long</code> chứa tới khoảng 9,2 · 10¹⁸, nên tích hai số ≤ 10⁹ vẫn vừa.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="4" data-min="3" data-optional data-title="Đánh giá độ phức tạp thuật toán Euclid">
+  <h2>Đánh giá độ phức tạp thuật toán Euclid</h2>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Xét <i class="v">a</i> ≥ <i class="v">b</i>. Nếu <i class="v">b</i> ≤ <i class="v">a</i>/2: <i class="v">a</i> mod <i class="v">b</i> &lt; <i class="v">b</i> ≤ <i class="v">a</i>/2.</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span>Nếu <i class="v">b</i> &gt; <i class="v">a</i>/2: <i class="v">a</i> mod <i class="v">b</i> = <i class="v">a</i> − <i class="v">b</i> &lt; <i class="v">a</i>/2.</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span>Vậy <i class="v">a</i> mod <i class="v">b</i> &lt; <i class="v">a</i>/2 trong cả hai trường hợp.</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span>Sau hai bước, số lớn giảm ít nhất một nửa.<span class="qed">∎</span></span></div>
+    <div class="ln concl" data-s="5" data-at="5"><span class="no">→</span><span>Với số 64-bit: nhiều nhất 90 bước (trường hợp xấu nhất là hai số Fibonacci liên tiếp).</span></div>
+  </div>
+  <aside class="notes">
+    <p>Từ dòng 4 suy ra Euclid chạy khoảng 2 · log₂ <i>a</i> bước. Con số 90 bước đã kiểm bằng script với các cặp Fibonacci nhỏ hơn 2⁶³.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="4" data-min="6" data-title="Luyện tập B (tính tay): ABC142 D">
+  <h2>Luyện tập: ABC142 D, tính tay</h2>
+  <div class="row top body">
+    <div class="col grow">
+      <p class="t">Chọn nhiều nhất bao nhiêu ước chung của <i class="v">A</i> và <i class="v">B</i>, sao cho hai số bất kỳ đã chọn nguyên tố cùng nhau?</p>
+      <p class="t mx">(12, 18) → ?&nbsp;&nbsp;&nbsp;&nbsp;(420, 660) → ?</p>
+      <div class="swap">
+        <div class="box" data-s="1" data-hide="2">Gợi ý 1. Ước chung của <i class="v">A</i> và <i class="v">B</i> chính là ước của gcd(<i class="v">A</i>, <i class="v">B</i>).</div>
+        <div class="box" data-s="2" data-hide="3">Gợi ý 2. gcd(12, 18) = 6 = 2 · 3. Chọn 1, 2, 3: được 3 số.</div>
+        <div class="box key" data-s="3">Đáp án = số lượng ước nguyên tố của gcd, cộng 1 (cho số 1). (420, 660): gcd = 60 = 2<sup>2</sup> · 3 · 5, nên 3 + 1 = 4.</div>
+      </div>
+    </div>
+    <div class="col" style="width:25cqw;align-items:center">
+      <div class="timer" data-widget="timer" data-sec="360"></div>
+      <div class="lbl">ABC142 D</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Đồng hồ 6 phút. Bấm → để hiện lần lượt gợi ý 1, gợi ý 2, đáp án.</p>
+    <p><b>Vì sao không chọn được nhiều hơn:</b> mỗi số &gt; 1 đã chọn có ít nhất một ước nguyên tố của gcd, và hai số khác nhau không được chung ước nguyên tố nào. Nên mỗi số nguyên tố của gcd dùng cho tối đa một số, cộng thêm số 1.</p>
+    <p>Mẫu của đề: (12, 18) ra 3, (420, 660) ra 4, (1, 2019) ra 1. Code bài này làm ở nhà.</p>
+  </aside>
+</section>
+
+<!-- ============================== CHƯƠNG 5 ============================== -->
+
+<section class="slide" data-ch="5" data-min="2" data-title="100! có bao nhiêu chữ số 0 ở cuối?">
+  <h2>100! có bao nhiêu chữ số 0 ở cuối?</h2>
+  <div class="body col mid center">
+    <p class="big">10! = 3 628 8<span class="cr">00</span></p>
+    <p class="t">10! có 2 chữ số 0 ở cuối.</p>
+    <div class="box ask" data-s="1">100! có bao nhiêu chữ số 0 ở cuối? Ghi dự đoán.</div>
+    <div class="box key" data-s="2">Đáp án: 24. Vì sao?</div>
+  </div>
+  <aside class="notes">
+    <p>Cho đoán 30 giây. Câu trả lời hay gặp: 10 (đếm các số chia hết cho 10) hoặc 20 (đếm bội của 5). Chưa sửa; để slide sau giải thích.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="5" data-min="2" data-title="Số 0 ở cuối được tạo ra thế nào?">
+  <h2>Chữ số 0 tận cùng được đếm như thế nào?</h2>
+  <p class="head">10! = <span class="c2">2<sup>8</sup></span> · <span class="c3">3<sup>4</sup></span> · <span class="c5">5<sup>2</sup></span> · <span class="c7">7</span>: hai thừa số 5, nên hai số 0.</p>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Mỗi số 0 ở cuối là một thừa số 10 = 2 · 5.</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span>Với mỗi <i class="v">i</i>: 2<sup><i class="v">i</i></sup> &lt; 5<sup><i class="v">i</i></sup>, nên bội của 2<sup><i class="v">i</i></sup> nhiều hơn.</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span>Vậy <i class="v">N</i>! có nhiều thừa số 2 hơn thừa số 5.</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span>Số 0 ở cuối = số thừa số 5 của <i class="v">N</i>!.<span class="qed">∎</span></span></div>
+  </div>
+  <aside class="notes">
+    <p>10! có 8 thừa số 2 nhưng chỉ 2 thừa số 5, nên chỉ ghép được 2 thừa số 10. Tổng quát: số 0 ở cuối = min(số thừa số 2, số thừa số 5) = số thừa số 5.</p>
+    <p>Dòng 2: trong 1..<i>N</i>, số bội của 2<i>ⁱ</i> là ⌊<i>N</i>/2<i>ⁱ</i>⌋ ≥ ⌊<i>N</i>/5<i>ⁱ</i>⌋. Slide sau sẽ dùng đúng cách đếm này.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="5" data-min="4" data-title="Công thức Legendre: Đếm phân hoạch theo bội số">
+  <h2>Công thức Legendre: Đếm phân hoạch theo bội số</h2>
+  <div class="cols5" data-widget="cols5" data-n="30" data-w="89"></div>
+  <div class="row center">
+    <p class="t" data-s="1">Theo cột: 7</p>
+    <p class="t mx" data-s="2">Hàng 1: ⌊30/5⌋ = 6</p>
+    <p class="t mx" data-s="3">Hàng 2: ⌊30/25⌋ = 1</p>
+  </div>
+  <div class="proof">
+    <div class="ln" data-s="4" data-at="4"><span class="no">1</span><span>Mỗi <i class="v">k</i> góp một thừa số 5 cho mỗi 5<sup><i class="v">i</i></sup> chia hết <i class="v">k</i>.</span></div>
+    <div class="ln" data-s="5" data-at="5"><span class="no">2</span><span>Đếm theo hàng <i class="v">i</i>: có ⌊<i class="v">N</i>/5<sup><i class="v">i</i></sup>⌋ số <i class="v">k</i> như vậy.</span></div>
+    <div class="ln" data-s="6" data-at="6"><span class="no">3</span><span>Cộng lại: ⌊<i class="v">N</i>/5⌋ + ⌊<i class="v">N</i>/25⌋ + ⌊<i class="v">N</i>/125⌋ + …<span class="qed">∎</span></span></div>
+    <div class="ln concl" data-s="7" data-at="7"><span class="no">→</span><span class="mx">100!: ⌊100/5⌋ + ⌊100/25⌋ = 20 + 4 = 24</span></div>
+  </div>
+  <aside class="notes">
+    <p>Bước 1: mỗi số <i>k</i> từ 1 đến 30 có bao nhiêu thừa số 5 (khối xanh). Đếm theo cột: 1 + 1 + 1 + 1 + 2 + 1 = 7, số 25 góp hai khối.</p>
+    <p>Bước 2–3: đếm theo hàng. Hàng 1 là các bội của 5 (6 số), hàng 2 là các bội của 25 (1 số). Đây là mẹo “đổi chiều đếm” của cả buổi.</p>
+    <p>Bước 4–7: chứng minh tổng quát (công thức Legendre), rồi áp vào 100!.</p>
+    <p><b>Nếu lớp chưa biết phần nguyên:</b> ⌊30/5⌋ = 6 nghĩa là “có 6 bội của 5 không vượt quá 30”.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="5" data-min="2" data-title="Từ công thức đến code">
+  <h2>Từ công thức đến code</h2>
+  <div class="trace" style="grid-template-columns:44cqw 1fr">
+    <pre class="code" data-widget="code" data-id="zeros" data-hl="1:3-5 2:3-5 3:3-5 4:7">
+ll zeros(ll n) {
+  ll ans = 0;
+  while (n &gt; 0) {
+    n /= 5;
+    ans += n;
+  }
+  return ans;
+}</pre>
+    <div class="col">
+      <div class="lbl"><i class="v">n</i> = 100</div>
+      <div class="tbl tr39">
+        <div class="tr hd"><span>vòng</span><span><i class="v">n</i></span><span>ans</span></div>
+        <div class="tr" data-s="1" data-at="1"><span>1</span><span>20</span><span>20</span></div>
+        <div class="tr" data-s="2" data-at="2"><span>2</span><span>4</span><span>24</span></div>
+        <div class="tr" data-s="3" data-at="3"><span>3</span><span>0</span><span>24</span></div>
+      </div>
+      <p class="t-sm" data-s="4">Trả về 24. Mỗi vòng là một hàng: ⌊<i class="v">n</i>/5⌋, ⌊<i class="v">n</i>/25⌋, …</p>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Chia liên tiếp cho 5 cho ra đúng ⌊<i>n</i>/5⌋, ⌊<i>n</i>/25⌋, …, vì ⌊⌊<i>n</i>/5⌋/5⌋ = ⌊<i>n</i>/25⌋. Code dùng <code>ll</code> (<code>using ll = long long;</code>) đã khai báo ở slide 33.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="5" data-min="1" data-title="125! có bao nhiêu số 0 ở cuối?">
+  <h2>125! có bao nhiêu chữ số 0 ở cuối?</h2>
+  <div class="quiz body col mid" data-widget="quiz" data-key="D">
+    <div class="opts">
+      <button class="opt" data-k="A"><span class="L">A</span>12</button>
+      <button class="opt" data-k="B"><span class="L">B</span>25</button>
+      <button class="opt" data-k="C"><span class="L">C</span>30</button>
+      <button class="opt" data-k="D"><span class="L">D</span>31</button>
+    </div>
+    <div class="fb"></div>
+    <template data-for="A">12 ≈ 125/10: nhầm rằng cứ 10 số thì có một số 0.</template>
+    <template data-for="B">25 = ⌊125/5⌋: mới đếm hàng 1, quên các bội của 25 và 125.</template>
+    <template data-for="C">30 = 25 + 5: quên 125 = 5<sup>3</sup> góp thêm một thừa số 5.</template>
+    <template data-for="D">⌊125/5⌋ + ⌊125/25⌋ + ⌊125/125⌋ = 25 + 5 + 1 = 31.</template>
+  </div>
+  <aside class="notes"><p>Câu hỏi bản lề. Mỗi phương án sai là một lỗi thật. Đáp án D.</p></aside>
+</section>
+
+<section class="slide" data-ch="5" data-min="3" data-optional data-title="Ý của ABC280 D: tìm N nhỏ nhất sao cho K chia hết N!">
+  <h2><i class="v">N</i> nhỏ nhất để <i class="v">K</i> chia hết <i class="v">N</i>!</h2>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Phân tích <i class="v">K</i> thành tích các <i class="v">p</i><sup><i class="v">e</i></sup>.</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span>Với mỗi <i class="v">p</i><sup><i class="v">e</i></sup>: tìm <i class="v">N</i> nhỏ nhất mà <i class="v">N</i>! có ít nhất <i class="v">e</i> thừa số <i class="v">p</i> (Legendre và chặt nhị phân).</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span>Đáp án là <i class="v">N</i> lớn nhất trong các <i class="v">N</i> vừa tìm.</span></div>
+  </div>
+  <p class="t mx" data-s="4"><i class="v">K</i> = 30 = 2 · 3 · 5 → 5&nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;<i class="v">K</i> = 280 = 2<sup>3</sup> · 5 · 7 → 7</p>
+  <aside class="notes">
+    <p>Chỉ dùng cho lớp đã học chặt nhị phân. Ví dụ <i>K</i> = 280: cần <i>N</i> ≥ 4 cho 2³ (4! = 24 = 2³ · 3), <i>N</i> ≥ 5 cho 5, <i>N</i> ≥ 7 cho 7, nên đáp án 7.</p>
+  </aside>
+</section>
+
+<!-- ============================== CHƯƠNG 6 ============================== -->
+
+<section class="slide" data-ch="6" data-min="2" data-title="Xử lý số lớn với Đồng dư thức (Modular Arithmetic)">
+  <h2>Xử lý số lớn với Đồng dư thức (Modular Arithmetic)</h2>
+  <div class="row body">
+    <div class="clock" data-widget="clock" data-hours="100" data-run="2" data-w="30"></div>
+    <div class="col grow">
+      <p class="t" data-s="1">Bây giờ là 0 giờ. 100 giờ sau là mấy giờ?</p>
+      <p class="t mx" data-s="3">100 = 8 · 12 + <b class="cr">4</b>: chỉ phần dư 4 là quan trọng.</p>
+      <div class="box" data-s="4">Đề thi thường viết: “in kết quả theo modulo 10<sup>9</sup> + 7”. Ví dụ 100! mod (10<sup>9</sup> + 7) = 437 918 130.</div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>Bước 1: hỏi trước. Bước 2: kim quay 100 giờ. Bước 3: 100 = 8 · 12 + 4, nên là 4 giờ.</p>
+    <p>Ý chính: với các số khổng lồ, ta chỉ cần phần dư. 100! có 158 chữ số (đã kiểm), không kiểu dữ liệu nào chứa nổi, nên đề yêu cầu in phần dư khi chia cho 10⁹ + 7.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="6" data-min="3" data-title="Tính chất phân phối của phép Đồng dư">
+  <h2>Tính chất phân phối của phép Đồng dư</h2>
+  <p class="head"><i class="v">a</i> = <i class="v">q</i>₁ · <i class="v">m</i> + <i class="v">r</i>₁,&nbsp;&nbsp;<i class="v">b</i> = <i class="v">q</i>₂ · <i class="v">m</i> + <i class="v">r</i>₂</p>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span><i class="v">a</i> + <i class="v">b</i> = (<i class="v">q</i>₁ + <i class="v">q</i>₂) · <i class="v">m</i> + (<i class="v">r</i>₁ + <i class="v">r</i>₂).</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span>Bỏ bội của <i class="v">m</i>: <i class="v">a</i> + <i class="v">b</i> và <i class="v">r</i>₁ + <i class="v">r</i>₂ cùng số dư.</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span><i class="v">a</i> · <i class="v">b</i> = (<i class="v">q</i>₁<i class="v">q</i>₂<i class="v">m</i> + <i class="v">q</i>₁<i class="v">r</i>₂ + <i class="v">q</i>₂<i class="v">r</i>₁) · <i class="v">m</i> + <i class="v">r</i>₁<i class="v">r</i>₂.</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span>Tương tự: <i class="v">a</i> · <i class="v">b</i> và <i class="v">r</i>₁ · <i class="v">r</i>₂ cùng số dư.<span class="qed">∎</span></span></div>
+    <div class="ln concl" data-s="5" data-at="5"><span class="no">→</span><span>Đồng hồ (<i class="v">m</i> = 12): 7 + 8 = 15 dư 3; 7 · 8 = 56 dư 8.</span></div>
+  </div>
+  <aside class="notes">
+    <p>Đây là lý do có thể lấy <code>%</code> sau mỗi phép nhân trong vòng lặp mà kết quả cuối vẫn đúng. Phép trừ cũng vậy, nhưng phải cẩn thận với số âm (slide sau).</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="6" data-min="2" data-title="−7 % 5 trong C++ bằng bao nhiêu?">
+  <h2><span class="mono">−7 % 5</span> trong C++ bằng bao nhiêu?</h2>
+  <div class="quiz col" data-widget="quiz" data-key="C">
+    <div class="opts">
+      <button class="opt" data-k="A"><span class="L">A</span>3</button>
+      <button class="opt" data-k="B"><span class="L">B</span>2</button>
+      <button class="opt" data-k="C"><span class="L">C</span>−2</button>
+      <button class="opt" data-k="D"><span class="L">D</span>báo lỗi</button>
+    </div>
+    <div class="fb"></div>
+    <template data-for="A">3 là số dư theo toán học (−7 = −2 · 5 + 3). Nhưng trong C++, dấu của % đi theo số bị chia.</template>
+    <template data-for="B">2 là khi bỏ dấu, tức 7 % 5. C++ không bỏ dấu.</template>
+    <template data-for="C">C++ chia làm tròn về 0: −7 / 5 = −1, nên −7 % 5 = −7 − (−1) · 5 = −2.</template>
+    <template data-for="D">Không lỗi: % dùng được với số âm, chỉ là kết quả có thể âm.</template>
+  </div>
+  <div class="box key" data-s="2">Muốn số dư không âm: <span class="mono">((a % m) + m) % m</span>.</div>
+  <div class="box" data-s="3">Và <i class="v">a</i>, <i class="v">b</i> ≤ 10<sup>9</sup> thì <i class="v">a</i> · <i class="v">b</i> có thể tới 10<sup>18</sup>: phải dùng long long.</div>
+  <aside class="notes">
+    <p>Câu hỏi bản lề. Đáp án C. Từ C++11, phép chia số nguyên làm tròn về 0, nên dấu của <code>%</code> đi theo số bị chia.</p>
+    <p>Bước 2–3: hai cách sửa thường dùng trong bài “in kết quả theo modulo”.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="6" data-min="3" data-title="Thuật toán Lũy thừa nhị phân (Binary Exponentiation)">
+  <h2>Thuật toán Lũy thừa nhị phân (Binary Exponentiation)</h2>
+  <div class="body col mid">
+    <div class="bits" data-s="1">
+      <div class="bit one"><span class="w">8</span><span class="b">1</span></div>
+      <div class="bit one"><span class="w">4</span><span class="b">1</span></div>
+      <div class="bit"><span class="w">2</span><span class="b">0</span></div>
+      <div class="bit one"><span class="w">1</span><span class="b">1</span></div>
+      <span class="t mx" style="margin-left:2cqw">13 = 8 + 4 + 1 = 1101<sub>2</sub></span>
+    </div>
+    <div class="sqc" data-s="2">
+      <span class="pw use">3</span><span class="op">bình phương →</span>
+      <span class="pw">3<sup>2</sup> = 9</span><span class="op">→</span>
+      <span class="pw use">3<sup>4</sup> = 81</span><span class="op">→</span>
+      <span class="pw use">3<sup>8</sup> = 6561</span>
+    </div>
+    <p class="t mx center" data-s="3">3<sup>13</sup> = 3<sup>8</sup> · 3<sup>4</sup> · 3 = 6561 · 81 · 3 = 1 594 323</p>
+    <p class="t center" data-s="4"><i class="v">n</i> ≤ 10<sup>9</sup> chỉ có 30 chữ số nhị phân: khoảng 30 lần bình phương, thay vì 10<sup>9</sup> phép nhân.</p>
+  </div>
+  <aside class="notes">
+    <p>13 = 1101₂ nên 3¹³ = 3⁸ · 3⁴ · 3¹. Bình phương liên tiếp: 3 → 9 → 81 → 6561, rồi nhân các lũy thừa ứng với chữ số 1.</p>
+    <p><b>Hỏi lớp:</b> tính 3¹⁰⁰ cần bao nhiêu lần bình phương? → 100 = 1100100₂ có 7 chữ số, nên khoảng 7 lần.</p>
+  </aside>
+</section>
+
+<section class="slide" data-ch="6" data-min="3" data-title="Chứng minh tính đúng đắn của Lũy thừa nhị phân">
+  <h2>Chứng minh tính đúng đắn của Lũy thừa nhị phân</h2>
+  <div class="row top">
+    <pre class="code sm" data-widget="code" data-id="power_loop" data-hl="2:3-4 3:2" style="width:54cqw">
+while (e &gt; 0) {
+  if (e % 2 == 1) kq = kq * b % m;
+  b = b * b % m;
+  e /= 2;
+}</pre>
+    <div class="box key grow"><div class="lbl">Bất biến vòng lặp (Loop Invariant) trong hệ đồng dư</div><p class="big sm">kq · <i class="v">b</i><sup><i class="v">e</i></sup> = <i class="v">a</i><sup><i class="v">n</i></sup></p></div>
+  </div>
+  <div class="proof">
+    <div class="ln" data-s="1" data-at="1"><span class="no">1</span><span>Đầu: kq = 1, <i class="v">b</i> = <i class="v">a</i>, <i class="v">e</i> = <i class="v">n</i>. Đẳng thức đúng.</span></div>
+    <div class="ln" data-s="2" data-at="2"><span class="no">2</span><span><i class="v">e</i> chẵn: <i class="v">b</i><sup><i class="v">e</i></sup> = (<i class="v">b</i><sup>2</sup>)<sup><i class="v">e</i>/2</sup>. Đổi <i class="v">b</i> → <i class="v">b</i><sup>2</sup>, <i class="v">e</i> → <i class="v">e</i>/2.</span></div>
+    <div class="ln" data-s="3" data-at="3"><span class="no">3</span><span><i class="v">e</i> lẻ: nhân kq với <i class="v">b</i>, rồi <i class="v">e</i> → <i class="v">e</i> − 1 (chẵn).</span></div>
+    <div class="ln" data-s="4" data-at="4"><span class="no">4</span><span>Cuối: <i class="v">e</i> = 0 nên kq = <i class="v">a</i><sup><i class="v">n</i></sup>.<span class="qed">∎</span></span></div>
+  </div>
+  <aside class="notes">
+    <p>Bất biến: trước mỗi vòng, kq · <i>b</i>^<i>e</i> = <i>a</i>ⁿ (theo modulo <i>m</i>). Hỏi học sinh tự nêu dòng 2 và 3 trước khi bấm. Dòng 3 cộng dòng 2 chính là <code>e /= 2</code> với <i>e</i> lẻ: (<i>e</i> − 1)/2.</p>
+    <p><b>Code đầy đủ</b> (để giáo viên tham khảo; học sinh tự viết ở bài CSES 1095):</p>
+    <pre>ll power(ll a, ll n, ll m) {
+  ll kq = 1, b = a % m, e = n;
+  while (e &gt; 0) {
+    if (e % 2 == 1) kq = kq * b % m;
+    b = b * b % m;
+    e /= 2;
+  }
+  return kq;
+}</pre>
+  </aside>
+</section>
+
+<section class="slide" data-ch="6" data-min="1" data-optional data-title="Luyện tập về nhà: CSES 1095 Exponentiation">
+  <h2>Về nhà: CSES 1095 Exponentiation</h2>
+  <div class="body col mid">
+    <p class="t">Tính <i class="v">a</i><sup><i class="v">b</i></sup> mod (10<sup>9</sup> + 7) cho tối đa 2 · 10<sup>5</sup> cặp (<i class="v">a</i>, <i class="v">b</i>), với 0 ≤ <i class="v">a</i>, <i class="v">b</i> ≤ 10<sup>9</sup>. Quy ước 0<sup>0</sup> = 1.</p>
+    <p class="t">Nộp tại <span class="mono">cses.fi/problemset/task/1095</span></p>
+    <div class="box" data-s="1">Gợi ý: dùng đúng vòng lặp ở slide trước. Khi <i class="v">b</i> = 0, vòng lặp không chạy và trả về 1, nên 0<sup>0</sup> = 1 tự đúng.</div>
+  </div>
+  <aside class="notes"><p>Giao đề, không làm tại lớp. Đề đã đối chiếu với trang CSES ngày 2026-10-10.</p></aside>
+</section>
+
+<!-- ============================== KẾT ============================== -->
+
+<section class="slide no-chip" data-ch="ket" data-min="2" data-title="Một ý tưởng, một mẹo">
+  <h2>Một ý tưởng, một mẹo</h2>
+  <div class="cards">
+    <div class="card" data-s="1"><b>1</b>Ước đi theo cặp: chỉ cần thử tới √<i class="v">n</i>.</div>
+    <div class="card" data-s="2"><b>2</b>Số ước là tích các (số mũ + 1).</div>
+    <div class="card" data-s="3"><b>3</b>Đi gạch thay vì đi hỏi: sàng và spf.</div>
+    <div class="card" data-s="4"><b>4</b>gcd lấy mũ nhỏ, lcm lấy mũ lớn; Euclid.</div>
+    <div class="card" data-s="5"><b>5</b>Đếm theo hàng: ⌊<i class="v">N</i>/5⌋ + ⌊<i class="v">N</i>/25⌋ + …</div>
+    <div class="card" data-s="6"><b>6</b>Chỉ giữ phần dư; lũy thừa nhị phân.</div>
+  </div>
+  <div class="box key" data-s="7"><b>Ý tưởng:</b> phân tích số thông qua các thừa số nguyên tố. <b>Mẹo:</b> đổi góc nhìn khi đếm.</div>
+  <aside class="notes">
+    <p>Bấm → để hiện từng chương. <b>Hỏi lớp:</b> chương nào dùng mẹo “đổi góc nhìn khi đếm”? → chương 1 (ghép cặp ước), chương 3 (đi gạch thay vì đi hỏi), chương 5 (đếm theo hàng).</p>
+  </aside>
+</section>
+
+<section class="slide no-chip" data-ch="ket" data-min="4" data-title="Phiếu ra về và bài về nhà">
+  <h2>Phiếu ra về</h2>
+  <div class="col">
+    <div class="q3"><b>1.</b> 3600 có bao nhiêu ước?<span class="ans" data-s="1">3600 = 2<sup>4</sup> · 3<sup>2</sup> · 5<sup>2</sup>, nên có 5 · 3 · 3 = 45 ước.</span></div>
+    <div class="q3"><b>2.</b> gcd và lcm của 84 và 60?<span class="ans" data-s="2">84 = 2<sup>2</sup> · 3 · 7 và 60 = 2<sup>2</sup> · 3 · 5: gcd = 12, lcm = 420.</span></div>
+    <div class="q3"><b>3.</b> 20! có bao nhiêu chữ số 0 ở cuối?<span class="ans" data-s="3">⌊20/5⌋ = 4, vì 20 &lt; 25.</span></div>
+  </div>
+  <div class="hw" data-s="4">
+    <div class="lbl">Bài về nhà</div>
+    <p class="t-sm"><b>Mức 1:</b> ABC180 C · ABC142 D · CF 472A · CSES 1618</p>
+    <p class="t-sm"><b>Mức 2:</b> CSES 1713 · ABC106 B · ABC125 C · ABC215 D · CSES 1095</p>
+    <p class="t-sm"><b>Mức 3:</b> ABC254 D · ABC280 D · ABC172 D</p>
+  </div>
+  <aside class="notes">
+    <p>Học sinh làm 3 câu trên giấy trong 3 phút rồi nộp. Giáo viên chấm nhanh để biết buổi sau cần ôn chỗ nào. Bấm → để hiện lần lượt đáp án, rồi danh sách bài về nhà.</p>
+    <p>Phiếu chỉ để biết lớp đang ở đâu, không chấm điểm.</p>
+  </aside>
+</section>
+
+</div>
+
+<template id="notes-extra">
+  <h2>Mục tiêu buổi học</h2>
+  <p>Sau buổi này học sinh làm được và giải thích được vì sao:</p>
+  <ul>
+    <li>Liệt kê ước, kiểm tra số nguyên tố trong O(√<i>n</i>).</li>
+    <li>Phân tích ra thừa số nguyên tố; tính số lượng ước số bằng tích các (số mũ + 1).</li>
+    <li>Cài đặt sàng Eratosthenes có mảng spf; biết vì sao bắt đầu từ <i>p</i>² và dừng ở √<i>N</i>.</li>
+    <li>Tính gcd và lcm bằng Euclid, không bị tràn số.</li>
+    <li>Đếm chữ số 0 ở cuối của <i>N</i>! bằng công thức Legendre.</li>
+    <li>Lấy dư đúng cách (số âm, tràn số) và tính lũy thừa nhanh.</li>
+  </ul>
+
+  <h2>Chuẩn bị</h2>
+  <ul>
+    <li>Máy chiếu và laptop. Mở file trước giờ học khi còn mạng để font tải xong; khi mất mạng, slide vẫn chạy với font có sẵn của máy.</li>
+    <li>Bấm <b>F</b> để toàn màn hình trên máy chiếu; bấm <b>S</b> để mở cửa sổ giáo viên trên laptop (cần cho phép cửa sổ bật lên).</li>
+    <li>Bảng con và bút cho học sinh (dùng cho các câu dự đoán và câu hỏi bản lề).</li>
+    <li>Slide tùy chọn đang ẩn. Bấm <b>O</b> để bật cho lớp khá.</li>
+  </ul>
+
+  <h2>Phím tắt khi trình chiếu</h2>
+  <table>
+    <tr><td>→ · Space · PageDown</td><td>bước tiếp theo</td></tr>
+    <tr><td>← · PageUp</td><td>lùi một bước</td></tr>
+    <tr><td>↓ / ↑</td><td>sang slide sau / trước, bỏ qua các bước</td></tr>
+    <tr><td>1 … 6</td><td>nhảy tới chương; 0 về slide đầu</td></tr>
+    <tr><td>Esc</td><td>tổng quan các slide</td></tr>
+    <tr><td>S</td><td>cửa sổ giáo viên: ghi chú, bước kế tiếp, slide sau, đồng hồ</td></tr>
+    <tr><td>F · B · O · T</td><td>toàn màn hình · màn đen · bật/tắt slide tùy chọn · chạy/dừng đồng hồ đếm ngược</td></tr>
+    <tr><td>A</td><td>tự đo cỡ chữ và chỗ tràn khung trên mọi slide</td></tr>
+  </table>
+
+  <h2>Điểm cắt và phương án rút gọn</h2>
+  <table>
+    <tr><th>Tình huống</th><th>Cách làm</th><th>Còn lại</th></tr>
+    <tr><td>Chậm khoảng 10 phút</td><td>Giao về nhà luyện tập A (slide 19) và bỏ slide 26, 30</td><td>104′</td></tr>
+    <tr><td>Cần buổi 90 phút</td><td>Thêm: bỏ chương 6 (slide 42–46) và luyện tập B (slide 35)</td><td>85′</td></tr>
+    <tr><td>Tách 2 buổi × 60 phút</td><td>Buổi 1: mở đầu, chương 1–3, bỏ slide nghỉ (59′). Buổi 2: nhắc lại “thừa số nguyên tố” 5′, chương 4–6 và kết (50′ + 5′)</td><td>59′ và 55′</td></tr>
+    <tr><td>Lớp khá</td><td>Đổi luyện tập A và B thành bài về nhà (−12′), bật slide tùy chọn 28, 18, 11, 34 (+12′)</td><td>114′</td></tr>
+  </table>
+
+  <h2>Chỗ ta thừa nhận, không chứng minh</h2>
+  <p>Chỉ có một: tính <b>duy nhất</b> của phân tích ra thừa số nguyên tố (slide 10). Nó cần bổ đề “nếu số nguyên tố <i>p</i> chia hết <i>a</i> · <i>b</i> thì <i>p</i> chia hết <i>a</i> hoặc <i>p</i> chia hết <i>b</i>”. Các slide 14 và 30 dựa vào nó. Hãy nói rõ với học sinh là ta thừa nhận phần này.</p>
+
+  <h2>Bài về nhà</h2>
+  <table>
+    <tr><th>Mức</th><th>Bài</th><th>Gắn với</th></tr>
+    <tr><td>1</td><td><a href="https://atcoder.jp/contests/abc180/tasks/abc180_c">ABC180 C</a> · <a href="https://atcoder.jp/contests/abc142/tasks/abc142_d">ABC142 D</a> · <a href="https://codeforces.com/problemset/problem/472/A">CF 472A</a> · <a href="https://cses.fi/problemset/task/1618">CSES 1618</a></td><td>chương 1, 4, 3, 5</td></tr>
+    <tr><td>2</td><td><a href="https://cses.fi/problemset/task/1713">CSES 1713</a> · <a href="https://atcoder.jp/contests/abc106/tasks/abc106_b">ABC106 B</a> · <a href="https://atcoder.jp/contests/abc125/tasks/abc125_c">ABC125 C</a> · <a href="https://atcoder.jp/contests/abc215/tasks/abc215_d">ABC215 D</a> · <a href="https://cses.fi/problemset/task/1095">CSES 1095</a></td><td>chương 2–3, 2, 4, 3, 6</td></tr>
+    <tr><td>3</td><td><a href="https://atcoder.jp/contests/abc254/tasks/abc254_d">ABC254 D</a> · <a href="https://atcoder.jp/contests/abc280/tasks/abc280_d">ABC280 D</a> · <a href="https://atcoder.jp/contests/abc172/tasks/abc172_d">ABC172 D</a></td><td>chương 2, 5, 5</td></tr>
+  </table>
+  <p>Đã đối chiếu với trang đề (2026-10-10): CSES 1095, CSES 1713, ABC106 B, ABC142 D. Các bài còn lại chưa đối chiếu; README trong folder có nhiều mô tả sai, nên đọc đề gốc trước khi giao.</p>
+
+  <h2>Đáp án nhanh</h2>
+  <ul>
+    <li>Bài toán tủ: 10 tủ mở, là các số chính phương 1, 4, 9, …, 100.</li>
+    <li>Luyện tập A: 5 số (105, 135, 165, 189, 195). Luyện tập B: (12, 18) ra 3, (420, 660) ra 4.</li>
+    <li>Câu bản lề: slide 8 → C (10) · slide 17 → C (12) · slide 27 → D (7) · slide 33 → B (tràn số) · slide 40 → D (31) · slide 44 → C (−2).</li>
+    <li>Phiếu ra về: 45 ước · gcd 12, lcm 420 · 4 chữ số 0.</li>
+  </ul>
+</template>
+
+<script src="../templates/ban-ngay/ban-ngay.js"></script>
+<script src="so-hoc-widgets.js"></script>
+</body>
+</html>

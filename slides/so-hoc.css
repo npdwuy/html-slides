@@ -1,0 +1,144 @@
+/* =====================================================================
+   Hình riêng của bài “Những viên gạch của số học” (dùng cùng ban-ngay.css)
+   ===================================================================== */
+.tcol { color: var(--tt); }
+
+/* ---------- bố cục chạy code + bảng ---------- */
+.trace { display: grid; grid-template-columns: 55cqw 1fr; column-gap: 3cqw; row-gap: 1.2cqw; align-items: start; }
+.trace .result { grid-column: 1 / -1; font-size: 3.2cqw; line-height: 1.35; }
+.tr3 .tr { grid-template-columns: 6cqw 11cqw 1fr; }
+.tr16 .tr { grid-template-columns: 5cqw 12cqw 1fr; font-size: 2.8cqw; }
+.tr39 .tr { grid-template-columns: 8cqw 9cqw 1fr; }
+
+/* ---------- 100 cánh tủ ---------- */
+.lockers { width: 46cqw; flex: none; }
+.lk-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: .3cqw; }
+.lk { height: 3.55cqw; border: .15cqw solid #b9b4a8; border-radius: .35cqw; background: #f3f1ea; font-family: var(--f-math); font-size: 2.4cqw; display: flex; align-items: center; justify-content: center; color: var(--mut); transition: background .12s; }
+.lk.open { background: #f4dfb3; border-color: var(--c3); color: var(--ink); }
+.lockers.show-open .lk:not(.open) { opacity: .4; }
+.lockers.show-open .lk.open { background: var(--c3); color: var(--ink); font-weight: 700; }
+.lk-cap { font-size: 2.8cqw; margin-top: .8cqw; min-height: 3.6cqw; color: var(--mut); }
+
+/* ---------- các bạn chạm tủ 12 ---------- */
+.students { display: flex; gap: 1.2cqw; justify-content: center; }
+.st { width: 6cqw; height: 6cqw; border-radius: 50%; border: .2cqw solid #b9b4a8; display: flex; align-items: center; justify-content: center; font-family: var(--f-math); font-size: 3.2cqw; background: var(--paper); transition: all .3s; }
+.ge1 .st.d { border-color: var(--c2); border-width: .35cqw; background: var(--hl); color: var(--t2); font-weight: 700; }
+.ge1 .st:not(.d) { opacity: .4; }
+
+/* ---------- cặp ước và tấm gương ---------- */
+.pairs svg, .mir-fig svg, .ftree svg, .lattice svg, .isobox svg, .expbars svg, .cols5 svg, .clock svg { display: block; }
+.pairs .num { fill: var(--ink); font-family: var(--f-math); transition: fill .3s; }
+.pairs.colored .num:not(.self) { fill: var(--tt); }
+.pairs.selfon .num.self { fill: var(--tt); font-weight: 700; }
+.mir-fig .num { fill: var(--tt); font-family: var(--f-math); }
+.mir-fig .num.self { font-weight: 700; }
+.arc { fill: none; stroke: var(--cc); stroke-width: 3.4; stroke-linecap: round; }
+.arc.gray { stroke: #a49f93; stroke-width: 3; }
+.ring { fill: none; stroke: var(--cc); stroke-width: 3.4; }
+.lab { fill: var(--ink); font-family: var(--f-math); }
+.mline { stroke: var(--cr); stroke-width: 3; stroke-dasharray: 10 8; }
+.mir-ctl { display: flex; align-items: center; gap: 2.4cqw; font-size: 3cqw; }
+.mir-ctl input[type=range] { width: 24cqw; height: 2.6cqw; accent-color: var(--c2); cursor: pointer; }
+.mir-key { font-size: 2.6cqw; color: var(--mut); }
+
+/* ---------- cây phân tích ---------- */
+.ftree .edge { stroke: #77736b; stroke-width: 2.4; }
+.ftree .node { fill: var(--ink); font-family: var(--f-math); transition: fill .3s; }
+.ftree.leafon .leaf { fill: var(--tt); font-weight: 700; }
+
+/* ---------- lưới ước ---------- */
+.lattice .guide { stroke: #e2dfd4; stroke-width: 1.5; }
+.lattice .axis { stroke: #8d8b84; stroke-width: 2; }
+.lattice .tick { fill: var(--tt); font-family: var(--f-math); }
+.lattice .axt { fill: var(--tt); font-family: var(--f-var); font-style: italic; }
+.lattice .pt { fill: var(--ink); }
+.lattice .pv { fill: var(--ink); font-family: var(--f-math); }
+
+/* ---------- hai lớp ước của 360 ---------- */
+.layer { display: flex; flex-direction: column; gap: .6cqw; align-items: center; }
+.lgrid { display: grid; grid-template-columns: repeat(3, 8.4cqw); gap: .5cqw; }
+.lgrid span { height: 4.4cqw; border: .15cqw solid var(--line); border-radius: .4cqw; background: var(--paper); display: flex; align-items: center; justify-content: center; font-family: var(--f-math); font-size: 2.8cqw; }
+.layer.with5 .lgrid span { border-color: var(--c5); background: #eef7f4; }
+.ib-e { stroke: #8d8b84; stroke-width: 2; }
+.ib-d { fill: var(--cc); }
+
+/* ---------- sàng ---------- */
+.sieve { width: 46cqw; flex: none; }
+.sv-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: .3cqw; }
+.sv { height: 3.55cqw; border: .15cqw solid #c9c5bb; border-radius: .35cqw; background: var(--paper); font-family: var(--f-math); font-size: 2.4cqw; display: flex; align-items: center; justify-content: center; position: relative; }
+.sv.one { color: var(--mut); background: #f1efe9; }
+.sv.x { background: color-mix(in srgb, var(--cc) 22%, white); border-color: var(--cc); color: var(--tt); }
+.sv.x::after { content: ""; position: absolute; left: 14%; right: 14%; top: 50%; border-top: .2cqw solid var(--cc); transform: rotate(-24deg); }
+.sv-grid.done .sv:not(.x):not(.one) { border-color: var(--ink); border-width: .3cqw; font-weight: 700; }
+.sw { display: inline-block; width: 2.4cqw; height: 2.4cqw; border-radius: .4cqw; background: color-mix(in srgb, var(--cc) 30%, white); border: .2cqw solid var(--cc); vertical-align: -.3cqw; margin-right: 1cqw; }
+
+/* ---------- dải bội của 5 (vì sao bắt đầu từ p²) ---------- */
+.strip { display: flex; gap: 1.6cqw; justify-content: center; }
+.sc { display: flex; flex-direction: column; align-items: center; gap: .3cqw; border: .2cqw solid var(--cc); background: color-mix(in srgb, var(--cc) 14%, white); border-radius: .7cqw; padding: .7cqw 1.4cqw; min-width: 18cqw; }
+.sc .mx { font-size: 3.2cqw; }
+.sc .t-sm { color: var(--tt); }
+
+/* ---------- chuỗi SPF ---------- */
+.chain { display: flex; align-items: center; justify-content: center; gap: 1.2cqw; font-family: var(--f-math); }
+.cbox { font-size: 4.4cqw; border: .22cqw solid var(--ink); border-radius: .7cqw; padding: .5cqw 1.6cqw; background: var(--paper); }
+.carr { font-size: 3cqw; color: var(--mut); }
+
+/* ---------- thanh so sánh ---------- */
+.bar-row { display: flex; align-items: center; gap: 1.6cqw; font-size: 3cqw; }
+.bar-row .what { width: 18cqw; flex: none; }
+.hbar { height: 3.4cqw; border-radius: .5cqw; background: color-mix(in srgb, var(--cc) 40%, white); border: .2cqw solid var(--cc); flex: none; }
+
+/* ---------- số mũ của hai số ---------- */
+.expbars .blk { fill: color-mix(in srgb, var(--cc) 55%, white); stroke: var(--cc); stroke-width: 2.4; }
+.expbars .blk-b { fill: color-mix(in srgb, var(--cc) 16%, white); }
+.expbars .minl { stroke: var(--c2); stroke-width: 4; stroke-dasharray: 10 6; }
+.expbars .maxl { stroke: var(--cr); stroke-width: 4; stroke-dasharray: 10 6; }
+.expbars .pl { fill: var(--tt); font-family: var(--f-math); font-weight: 700; }
+.expbars .colname { fill: var(--mut); font-family: var(--f-math); }
+.expbars .baseline { stroke: #8d8b84; stroke-width: 2; }
+
+/* ---------- Euclid bằng hình ---------- */
+.euclid { display: flex; align-items: center; gap: 3cqw; flex: 1; min-height: 0; }
+.euclid .outline { fill: none; stroke: var(--ink); stroke-width: .14; }
+.euclid .dim { fill: var(--ink); font-family: var(--f-math); }
+.euclid .tile[data-s] { opacity: 1; }
+.euclid .tile path { fill: var(--cc); fill-opacity: 0; stroke: var(--cc); stroke-width: .17; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .8s ease-in-out, fill-opacity .5s .6s; }
+.euclid .tile.on path { stroke-dashoffset: 0; fill-opacity: .26; }
+.euclid .lbl2 { fill: var(--tt); font-family: var(--f-math); paint-order: stroke; stroke: rgba(251,250,246,.9); stroke-width: .4; stroke-linejoin: round; }
+.euclid .lbl2[data-s] { transition: opacity .4s ease .7s; }
+.euclid .gridov line { stroke: var(--cr); stroke-width: .11; stroke-dasharray: .4 .3; }
+
+/* ---------- đếm thừa số 5 ---------- */
+.cols5 .band { fill: var(--hl); stroke: var(--c2); stroke-width: 2; stroke-dasharray: 8 6; }
+.cols5 .blk5 { fill: color-mix(in srgb, var(--c5) 45%, white); stroke: var(--c5); stroke-width: 2; }
+.cols5 .kl { fill: var(--mut); font-family: var(--f-math); }
+.cols5 .kl.m5 { fill: var(--t5); font-weight: 700; }
+.cols5 .baseline { stroke: #8d8b84; stroke-width: 2; }
+
+/* ---------- đồng hồ ---------- */
+.clock { display: flex; flex-direction: column; align-items: center; gap: .6cqw; flex: none; }
+.clock .face { fill: var(--paper); stroke: var(--ink); stroke-width: 3; }
+.clock .hr { fill: var(--ink); font-family: var(--f-math); }
+.clock .hdot { fill: transparent; }
+.clock .hdot.hit { fill: var(--nobg); stroke: var(--cr); stroke-width: 3; }
+.clock .hr.hit { fill: var(--tr); font-weight: 700; }
+.clock .hand { stroke: var(--cr); stroke-width: 6; stroke-linecap: round; }
+.clock .hub { fill: var(--cr); }
+.clk-cap { font-size: 2.8cqw; color: var(--mut); min-height: 3.6cqw; font-family: var(--f-math); }
+
+/* ---------- lũy thừa qua nhị phân ---------- */
+.bits { display: flex; gap: 1.4cqw; align-items: flex-end; justify-content: center; }
+.bit { display: flex; flex-direction: column; align-items: center; gap: .4cqw; }
+.bit .w { font-size: 2.6cqw; color: var(--mut); font-family: var(--f-math); }
+.bit .b { width: 6cqw; height: 6cqw; border: .22cqw solid var(--ink); border-radius: .6cqw; display: flex; align-items: center; justify-content: center; font-family: var(--f-math); font-size: 3.6cqw; background: var(--paper); }
+.bit.one .b { background: var(--okbg); border-color: var(--c5); font-weight: 700; }
+.sqc { display: flex; align-items: center; justify-content: center; gap: 1cqw; font-family: var(--f-math); }
+.sqc .pw { font-size: 3.2cqw; border: .2cqw solid var(--line); border-radius: .6cqw; padding: .5cqw 1.2cqw; background: var(--paper); transition: all .3s; }
+.ge3 .sqc .pw.use { border-color: var(--c5); background: var(--okbg); font-weight: 700; }
+.sqc .op { font-size: 2.6cqw; color: var(--mut); }
+
+/* ---------- phiếu ra về ---------- */
+.q3 { font-size: 3.2cqw; line-height: 1.35; }
+.q3 .ans { display: block; color: var(--t5); font-size: 3cqw; margin-top: .2cqw; }
+.hw .t-sm { margin: .15cqw 0; }
+.slide.brk { align-items: center; justify-content: center; gap: 2.4cqw; }
