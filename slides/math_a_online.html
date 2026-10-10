@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View math_a.pptx Online</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-color: #333;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="viewer" src="" title="PowerPoint Viewer"></iframe>
+
+    <script>
+        // Tự động lấy tên miền hiện tại của bạn
+        const currentDomain = window.location.origin;
+        
+        // Đường dẫn tuyệt đối tới file PPTX
+        const pptxUrl = currentDomain + "/slides/math_a.pptx";
+        
+        // Sử dụng Microsoft Office Web Viewer để hiển thị trực tiếp
+        const viewerUrl = "https://view.officeapps.live.com/op/embed.aspx?src=" + encodeURIComponent(pptxUrl);
+        
+        // Nếu Microsoft lỗi, có thể thay bằng Google Docs Viewer:
+        // const viewerUrl = "https://docs.google.com/gview?url=" + encodeURIComponent(pptxUrl) + "&embedded=true";
+        
+        document.getElementById('viewer').src = viewerUrl;
+    </script>
+</body>
+</html>
